@@ -1,15 +1,37 @@
-# DonorConnect
+<div align="center">
+<img  src="https://readme-typing-svg.herokuapp.com?color=45ffaa&size=50&width=800&height=80&lines=Welcome-to-donorconnect"/>
+</div>
 
-Welcome to **DonorConnect**, an application designed to connect donors and organizations for life-saving contributions. This guide will help you contribute to the project.
+**DonorConnect**, an application designed to connect donors and organizations for life-saving contributions. This guide will help you contribute to the project.
 
 ## 📂 Project Overview
 
 **DonorConnect** is a Flutter-based application that provides a platform for people to donate blood and organs. Users can search and filter donors by location, blood group, and availability, as well as connect with relevant organizations.
 
 ### Features:
+
 - API integrations for fetching donor data.
 - Filtering by location, blood group, and availability.
 - Organization listings with navigation options.
+
+## 🏆 Featured in:
+
+<table>
+  <thead>
+    <tr>
+      <th>Event Logo</th>
+      <th>Event Name</th>
+      <th>Event Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="readme/gssoc_ext_2024.png" alt="GirlScript Summer of Code 2024 Logo"></td>
+      <td>GirlScript Summer of Code Extd 2024</td>
+      <td>GirlScript Summer of Code is a three-month-long Open Source Program conducted every summer by GirlScript Foundation. It is an initiative to bring more beginners to Open-Source Software Development.</td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- Lets get started -->
 <div>
@@ -27,10 +49,11 @@ Welcome to **DonorConnect**, an application designed to connect donors and organ
    ```
 
 3. **Change the directory:** Change to the repository directory on your computer (if you are not already there):
+
 ```bash
    cd .\donorconnect\
-   ```
-   
+```
+
 4. **Add a remote upstream:** Set up a remote upstream to the original repository by running the following command in your terminal:
 
    ```bash
@@ -42,7 +65,9 @@ Welcome to **DonorConnect**, an application designed to connect donors and organ
    ```bash
    git switch -c <your-branch-name>
    ```
-6. **Setup Environment:** 
+
+6. **Setup Environment:**
+
    ```bash
    flutter clean
    flutter pub get
@@ -53,11 +78,12 @@ Welcome to **DonorConnect**, an application designed to connect donors and organ
    ```bash
    git add <changed-file1> <changed-file2> ...
    ```
+
    or simply run
-      ```bash
+
+   ```bash
    git add .
    ```
-
 
 8. **Commit your changes:** Commit your changes with a descriptive message:
 
@@ -79,10 +105,12 @@ Welcome to **DonorConnect**, an application designed to connect donors and organ
    Launch GitHub Desktop and log in to your GitHub account if you haven't already.
 
 2. **Clone the Repository:**
+
    - If you haven't cloned the donorconnect repository yet, you can do so by clicking on the "File" menu and selecting "Clone Repository."
    - Choose the donorconnect repository from the list of repositories on GitHub and clone it to your local machine.
 
 3. **Switch to the Correct Branch:**
+
    - Ensure you are on the branch that you want to submit a pull request for.
    - If you need to switch branches, you can do so by clicking on the "Current Branch" dropdown menu and selecting the desired branch.
 
@@ -90,6 +118,7 @@ Welcome to **DonorConnect**, an application designed to connect donors and organ
    Make your changes to the code or files in the repository using your preferred code editor.
 
 5. **Commit Changes:**
+
    - In GitHub Desktop, you'll see a list of the files you've changed. Check the box next to each file you want to include in the commit.
    - Enter a summary and description for your changes in the "Summary" and "Description" fields, respectively. Click the "Commit to <branch-name>" button to commit your changes to the local branch.
 
@@ -97,15 +126,17 @@ Welcome to **DonorConnect**, an application designed to connect donors and organ
    After committing your changes, click the "Push origin" button in the top right corner of GitHub Desktop to push your changes to your forked repository on GitHub.
 
 7. **Create a Pull Request:**
-  - Go to the GitHub website and navigate to your fork of the repository.
-  - You should see a button to "Compare & pull request" between your fork and the original repository. Click on it.
+
+- Go to the GitHub website and navigate to your fork of the repository.
+- You should see a button to "Compare & pull request" between your fork and the original repository. Click on it.
 
 8. **Review and Submit:**
+
    - On the pull request page, review your changes and add any additional information, such as a title and description, that you want to include with your pull request.
    - Once you're satisfied, click the "Create pull request" button to submit your pull request.
 
 9. **Wait for Review:**
-    Your pull request will now be available for review by the project maintainers. They may provide feedback or ask for changes before merging your pull request into the main branch of the repository.
+   Your pull request will now be available for review by the project maintainers. They may provide feedback or ask for changes before merging your pull request into the main branch of the repository.
 
 ⭐️ Support the Project
 If you find this project helpful, please consider giving it a star on GitHub! Your support helps to grow the project and reach more contributors.
