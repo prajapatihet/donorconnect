@@ -15,6 +15,8 @@
 - Organization listings with navigation options.
 - For more refer this [Click here](Feature_Functionality.md)
 
+
+  
 ## 🏆 Featured in:
 
 <table>
@@ -33,6 +35,14 @@
     </tr>
   </tbody>
 </table>
+
+## Design View
+- Abstract View
+<div>
+  
+![Screenshot 2024-10-02 012859](https://github.com/user-attachments/assets/c2463ea7-9281-43ae-bfb9-4ed83cc3f8e6)
+![Screenshot 2024-10-02 013024](https://github.com/user-attachments/assets/552e489b-1cc6-4ae5-b82f-27938c7a62fd)
+</div>
 
 <!-- Lets get started -->
 <div>
