@@ -14,7 +14,7 @@ class _SignuppageState extends State<Signuppage> {
   TextEditingController numberController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  bool? check1 = false, check2 = false;
   bool _isValidate = false;
 
   validate() {
@@ -62,7 +62,7 @@ class _SignuppageState extends State<Signuppage> {
           SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(
-                  top: screenHeight * 0.39,
+                  top: screenHeight * 0.09,
                   left: screenHeight * 0.03,
                   right: screenHeight * 0.03),
               child: Column(
@@ -111,6 +111,44 @@ class _SignuppageState extends State<Signuppage> {
                     name: 'Create password',
                     errormsg: _isValidate ? 'Please enter Password' : null,
                   ),
+                  SizedBox(height: screenHeight * 0.02),
+
+                  Textbox(
+                    controller: passwordController,
+                    icons: Icons.lock,
+                    name: 'Confirm password',
+                    errormsg: _isValidate ? 'Please enter Password' : null,
+                  ),
+
+                  Row(
+                    children: [
+                      Checkbox(
+                        //checkbox positioned at left
+                        value: check1,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            check1 = value;
+                          });
+                        },
+                      ),
+                      Text("Available for Organ Donation"),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(
+                        //checkbox positioned at left
+                        value: check2,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            check2 = value;
+                          });
+                        },
+                      ),
+                      Text("Available for Blood Donation"),
+                    ],
+                  ),
+
                   SizedBox(height: screenHeight * 0.05),
 
                   InkWell(
