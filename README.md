@@ -34,17 +34,6 @@
   </tbody>
 </table>
 
-## Design View
-
-- Abstract View (build like this or have new design then go ahead)
-- It is just for reference(Not actual design)
-
-<div>
-  
-![Screenshot 2024-10-02 012859](https://github.com/user-attachments/assets/c2463ea7-9281-43ae-bfb9-4ed83cc3f8e6)
-![Screenshot 2024-10-02 013024](https://github.com/user-attachments/assets/552e489b-1cc6-4ae5-b82f-27938c7a62fd)
-</div>
-
 <!-- Lets get started -->
 <div>
 <h2><img src = "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Rocket.png" width="35" height="35"> Let's Get Started</h2>
