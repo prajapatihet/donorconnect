@@ -1,7 +1,8 @@
+import 'package:donorconnect/views/pages/main_home/homepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'signup.dart';
-import '../Utils/Textbox.dart';
+import '../register/signup.dart';
+import '../../../Utils/Textbox.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -31,9 +32,10 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> loginUser() async {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      setState(() {
-        _isValidate = false; // Reset validation flag
-      });
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomePage()));
+      // setState(() {
+      //   _isValidate = false; // Reset validation flag
+      // });
     } else {
       setState(() {
         _isValidate = true;
