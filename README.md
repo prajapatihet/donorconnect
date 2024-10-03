@@ -8,13 +8,6 @@
 
 **DonorConnect** is a Flutter-based application that provides a platform for people to donate blood and organs. Users can search and filter donors by location, blood group, and availability, as well as connect with relevant organizations.
 
-### Features:
-
-- API integrations for fetching donor data.
-- Filtering by location, blood group, and availability.
-- Organization listings with navigation options.
-- For more refer this [Click here](Feature_Functionality.md)
-
 ## 🏆 Featured in:
 
 <table>
