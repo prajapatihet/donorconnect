@@ -39,6 +39,8 @@ dependencies:
   http: ^1.2.2
   shared_preferences: ^2.2.3
   jwt_decoder: ^2.0.1
+  get: ^4.6.6
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:
