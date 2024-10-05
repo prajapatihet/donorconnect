@@ -1,5 +1,6 @@
 import 'package:donorconnect/views/common_widgets/home_card.dart';
 import 'package:donorconnect/views/common_widgets/home_card_form.dart';
+import 'package:donorconnect/views/pages/locateBloodbank/locateBloodBank.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -59,7 +60,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   Icons.search,
                   size: 23,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LocateBloodbank(),));
+                },
               ),
               HomeCard(
                 title: "Learn About Donating",
