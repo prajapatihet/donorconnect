@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../Utils/Textbox.dart';
 
 class Signuppage extends StatefulWidget {
@@ -14,6 +15,7 @@ class _SignuppageState extends State<Signuppage> {
   TextEditingController numberController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   bool? check1 = false, check2 = false;
   bool _isValidate = false;
 
@@ -21,10 +23,26 @@ class _SignuppageState extends State<Signuppage> {
     if (emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty &&
         nameController.text.isNotEmpty &&
-        numberController.text.isNotEmpty) {
-      setState(() {
-        _isValidate = false; // Reset validation flag
-      });
+        numberController.text.isNotEmpty &&
+        confirmPasswordController.text.isNotEmpty) {
+      if (passwordController.text == confirmPasswordController.text) {
+        setState(() {
+          _isValidate = false; // Reset validation flag
+        });
+      } else {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const AlertDialog(
+                title: Center(
+                    child: Text(
+                  "Passwords don't match",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                )),
+              );
+            });
+        _isValidate = true;
+      }
     } else {
       setState(() {
         _isValidate = true;
@@ -80,6 +98,7 @@ class _SignuppageState extends State<Signuppage> {
                   // EMAIL TEXTBOX
                   Textbox(
                     controller: emailController,
+                    obscureText: false,
                     icons: Icons.mail,
                     name: 'Email',
                     errormsg: _isValidate ? 'Please enter Email' : null,
@@ -89,6 +108,7 @@ class _SignuppageState extends State<Signuppage> {
                   // FULL NAME TEXTBOX
                   Textbox(
                     controller: nameController,
+                    obscureText: false,
                     icons: Icons.person,
                     name: 'Full name',
                     errormsg: _isValidate ? 'Please enter Full name' : null,
@@ -98,6 +118,7 @@ class _SignuppageState extends State<Signuppage> {
                   // PHONE NUMBER TEXTBOX
                   Textbox(
                     controller: numberController,
+                    obscureText: false,
                     icons: Icons.call,
                     name: 'Phone number',
                     errormsg: _isValidate ? 'Please enter Phone number' : null,
@@ -107,14 +128,17 @@ class _SignuppageState extends State<Signuppage> {
                   // PASSWORD TEXTBOX
                   Textbox(
                     controller: passwordController,
+                    obscureText: true,
                     icons: Icons.lock,
                     name: 'Create password',
                     errormsg: _isValidate ? 'Please enter Password' : null,
                   ),
                   SizedBox(height: screenHeight * 0.02),
 
+                  // CONFIRM PASSWORD
                   Textbox(
-                    controller: passwordController,
+                    controller: confirmPasswordController,
+                    obscureText: true,
                     icons: Icons.lock,
                     name: 'Confirm password',
                     errormsg: _isValidate ? 'Please enter Password' : null,
