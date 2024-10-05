@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   final token;
+  final String? name;
+  final String? email;
 
-  const HomePage({super.key, this.token});
+  const HomePage({super.key, this.token, this.name, this.email});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -20,7 +22,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NavigationController());
+    final controller =
+        Get.put(NavigationController(widget.name ?? "No Name", widget.email!));
     return Scaffold(
       bottomNavigationBar: Obx(
         () => NavigationBar(
@@ -52,7 +55,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: Obx(
-        () => controller.screen[controller.selectedIndex.value],
+        () => controller.getScreens()[controller.selectedIndex.value],
       ),
     );
   }
