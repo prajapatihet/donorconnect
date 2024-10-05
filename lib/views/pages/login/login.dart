@@ -1,5 +1,7 @@
+import 'package:donorconnect/cubit/profile_cubit.dart';
 import 'package:donorconnect/views/pages/main_home/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Utils/Textbox.dart';
@@ -24,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    initSharedPref;
+    initSharedPref();
   }
 
   Future<void> initSharedPref() async {
