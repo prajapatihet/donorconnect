@@ -1,4 +1,5 @@
 import 'package:donorconnect/views/pages/main_home/homepage.dart';
+import 'package:donorconnect/views/pages/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Utils/Textbox.dart';
@@ -71,26 +72,26 @@ class _SignuppageState extends State<Signuppage> {
         fontSize: 18,
         fontWeight: FontWeight.w500);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading:Builder(
-          builder: (BuildContext context) {
-            return Container(
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                color: Colors.black,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            );
-          },
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: const Color.fromARGB(243, 222, 221, 255),
+      //   leading:Builder(
+      //     builder: (BuildContext context) {
+      //       return Container(
+      //         decoration: BoxDecoration(
+      //           color: Colors.white.withOpacity(0.2),
+      //           shape: BoxShape.circle,
+      //         ),
+      //         child: IconButton(
+      //           icon: const Icon(Icons.arrow_back),
+      //           color: Colors.black,
+      //           onPressed: () {
+      //             Navigator.pop(context);
+      //           },
+      //         ),
+      //       );
+      //     },
+      //   ),
+      // ),
       body: Stack(
         children: [
           // BACKGROUND IMAGE
@@ -107,11 +108,25 @@ class _SignuppageState extends State<Signuppage> {
           SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(
-                  top: screenHeight * 0.09,
+                  top: screenHeight * 0.03,  
                   left: screenHeight * 0.03,
                   right: screenHeight * 0.03),
               child: Column(
                 children: [
+                  // BACK BUTTON TO NAVIGATE BACK TO FRONT PAGE
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(10),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(Icons.arrow_back),
+                      ),
+                  ),
                   const Text(
                     'Register',
                     style: style,
