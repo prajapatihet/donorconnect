@@ -42,6 +42,7 @@ dependencies:
   get: ^4.6.6
   google_fonts: ^6.2.1
   icons_launcher: ^3.0.0
+  flutter_bloc: ^8.1.6
 
 dev_dependencies:
   flutter_test:

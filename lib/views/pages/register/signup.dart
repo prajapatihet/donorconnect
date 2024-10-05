@@ -1,3 +1,4 @@
+import 'package:donorconnect/views/pages/main_home/homepage.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Utils/Textbox.dart';
@@ -29,6 +30,12 @@ class _SignuppageState extends State<Signuppage> {
         setState(() {
           _isValidate = false; // Reset validation flag
         });
+        final String name = nameController.text;
+        final String email = emailController.text;
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomePage(name: name, email: email)));
       } else {
         showDialog(
             context: context,
