@@ -72,26 +72,6 @@ class _SignuppageState extends State<Signuppage> {
         fontSize: 18,
         fontWeight: FontWeight.w500);
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: const Color.fromARGB(243, 222, 221, 255),
-      //   leading:Builder(
-      //     builder: (BuildContext context) {
-      //       return Container(
-      //         decoration: BoxDecoration(
-      //           color: Colors.white.withOpacity(0.2),
-      //           shape: BoxShape.circle,
-      //         ),
-      //         child: IconButton(
-      //           icon: const Icon(Icons.arrow_back),
-      //           color: Colors.black,
-      //           onPressed: () {
-      //             Navigator.pop(context);
-      //           },
-      //         ),
-      //       );
-      //     },
-      //   ),
-      // ),
       body: Stack(
         children: [
           // BACKGROUND IMAGE
