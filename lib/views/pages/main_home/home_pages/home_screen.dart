@@ -1,7 +1,9 @@
+import 'package:donorconnect/cubit/auth/auth_cubit.dart';
 import 'package:donorconnect/views/common_widgets/home_card.dart';
 import 'package:donorconnect/views/common_widgets/home_card_form.dart';
 import 'package:donorconnect/views/pages/locateBloodbank/locateBloodBank.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,6 +28,16 @@ class _HomeScreenState extends State<HomeScreen> {
             letterSpacing: 1,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.read<AuthCubit>().signOut(context);
+            },
+            icon: const Icon(
+              Icons.logout,
+            ),
+          ),
+        ],
         toolbarHeight: 65,
         toolbarOpacity: 0.8,
         automaticallyImplyLeading: false,
@@ -61,7 +73,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   size: 23,
                 ),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LocateBloodbank(),));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LocateBloodbank(),
+                      ));
                 },
               ),
               HomeCard(

@@ -1,3 +1,5 @@
+import 'package:donorconnect/views/pages/welcome/welcome_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:donorconnect/cubit/auth/auth_state.dart';
 import 'package:donorconnect/models/user_model.dart';
@@ -37,11 +39,12 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(AuthLoading());
     try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      
+
       UserModel userModel = UserModel(
         uid: userCredential.user!.uid,
         name: name,
@@ -50,19 +53,29 @@ class AuthCubit extends Cubit<AuthState> {
         isOrganDonor: isOrganDonor,
         isBloodDonor: isBloodDonor,
       );
-      
-      await _firestore.collection('users').doc(userCredential.user!.uid).set(userModel.toMap());
+
+      await _firestore
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set(userModel.toMap());
     } catch (e) {
       emit(AuthError(e.toString()));
     }
   }
 
-
-  Future<void> signOut() async {
+  Future<void> signOut(BuildContext context) async {
     emit(AuthLoading());
     try {
       await _auth.signOut();
-      emit(Unauthenticated());
+      emit(
+        Unauthenticated(),
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const FrontPage(),
+        ),
+      );
     } catch (e) {
       emit(AuthError(e.toString()));
     }
@@ -72,7 +85,8 @@ class AuthCubit extends Cubit<AuthState> {
     _firestore.collection('users').doc(uid).snapshots().listen(
       (DocumentSnapshot snapshot) {
         if (snapshot.exists) {
-          UserModel user = UserModel.fromMap(snapshot.data() as Map<String, dynamic>);
+          UserModel user =
+              UserModel.fromMap(snapshot.data() as Map<String, dynamic>);
           emit(Authenticated(user));
         } else {
           emit(AuthError('User data not found'));
