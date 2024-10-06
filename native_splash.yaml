@@ -1,0 +1,14 @@
+flutter_native_splash:
+  android: true
+  ios: true
+  web: true
+
+  color: "#ffffff"
+  image: "assets/images/launcher_icon1.png"
+  branding: "assets/images/donorConnect1.png"
+
+  android_12:
+    color: "#ffffff"
+    image: "assets/images/launcher_icon1.png"
+    branding: "assets/images/donorConnect1.png"
+
