@@ -1,6 +1,9 @@
+import 'package:donorconnect/Utils/show_snackbar.dart';
+import 'package:donorconnect/cubit/auth/auth_cubit.dart';
+import 'package:donorconnect/cubit/auth/auth_state.dart';
 import 'package:donorconnect/views/pages/main_home/homepage.dart';
-import 'package:donorconnect/views/pages/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../Utils/Textbox.dart';
 
@@ -31,12 +34,14 @@ class _SignuppageState extends State<Signuppage> {
         setState(() {
           _isValidate = false; // Reset validation flag
         });
-        final String name = nameController.text;
-        final String email = emailController.text;
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomePage(name: name, email: email)));
+        context.read<AuthCubit>().registerUser(
+              email: emailController.text,
+              password: passwordController.text,
+              name: nameController.text,
+              phone: numberController.text,
+              isOrganDonor: check1 ?? false,
+              isBloodDonor: check2 ?? false,
+            );
       } else {
         showDialog(
             context: context,
@@ -72,168 +77,194 @@ class _SignuppageState extends State<Signuppage> {
         fontSize: 18,
         fontWeight: FontWeight.w500);
     return Scaffold(
-      body: Stack(
-        children: [
-          // BACKGROUND IMAGE
-          Image.asset(
-            'assets/images/signup.jpg',
-            fit: BoxFit.cover,
-            height: double.infinity,
-            width: double.infinity,
-          ),
-          // FORM CONTAINER
-          SizedBox(
-            height: screenHeight * 0.02,
-          ),
-          SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(
-                  top: screenHeight * 0.03,  
-                  left: screenHeight * 0.03,
-                  right: screenHeight * 0.03),
-              child: Column(
-                children: [
-                  // BACK BUTTON TO NAVIGATE BACK TO FRONT PAGE
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(),
-                        padding: const EdgeInsets.all(10),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(Icons.arrow_back),
-                      ),
-                  ),
-                  const Text(
-                    'Register',
-                    style: style,
-                  ),
-                  const Text(
-                    'Create your new account',
-                    style: style1,
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-
-                  // EMAIL TEXTBOX
-                  Textbox(
-                    controller: emailController,
-                    obscureText: false,
-                    icons: Icons.mail,
-                    name: 'Email',
-                    errormsg: _isValidate ? 'Please enter Email' : null,
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-
-                  // FULL NAME TEXTBOX
-                  Textbox(
-                    controller: nameController,
-                    obscureText: false,
-                    icons: Icons.person,
-                    name: 'Full name',
-                    errormsg: _isValidate ? 'Please enter Full name' : null,
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-
-                  // PHONE NUMBER TEXTBOX
-                  Textbox(
-                    controller: numberController,
-                    obscureText: false,
-                    icons: Icons.call,
-                    name: 'Phone number',
-                    errormsg: _isValidate ? 'Please enter Phone number' : null,
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-
-                  // PASSWORD TEXTBOX
-                  Textbox(
-                    controller: passwordController,
-                    obscureText: true,
-                    icons: Icons.lock,
-                    name: 'Create password',
-                    errormsg: _isValidate ? 'Please enter Password' : null,
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-
-                  // CONFIRM PASSWORD
-                  Textbox(
-                    controller: confirmPasswordController,
-                    obscureText: true,
-                    icons: Icons.lock,
-                    name: 'Confirm password',
-                    errormsg: _isValidate ? 'Please enter Password' : null,
-                  ),
-
-                  Row(
+      body: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          if (state is AuthError) {
+            showSnackBar(context, state.message);
+          }
+          if (state is Authenticated) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(
+                  name: nameController.text.trim(),
+                  email: emailController.text.trim(),
+                ),
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is AuthLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return Stack(
+            children: [
+              // BACKGROUND IMAGE
+              Image.asset(
+                'assets/images/signup.jpg',
+                fit: BoxFit.cover,
+                height: double.infinity,
+                width: double.infinity,
+              ),
+              // FORM CONTAINER
+              SizedBox(
+                height: screenHeight * 0.02,
+              ),
+              SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      top: screenHeight * 0.03,
+                      left: screenHeight * 0.03,
+                      right: screenHeight * 0.03),
+                  child: Column(
                     children: [
-                      Checkbox(
-                        //checkbox positioned at left
-                        value: check1,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            check1 = value;
-                          });
-                        },
+                      // BACK BUTTON TO NAVIGATE BACK TO FRONT PAGE
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: const CircleBorder(),
+                            padding: const EdgeInsets.all(10),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Icon(Icons.arrow_back),
+                        ),
                       ),
-                      Text("Available for Organ Donation"),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Checkbox(
-                        //checkbox positioned at left
-                        value: check2,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            check2 = value;
-                          });
-                        },
+                      const Text(
+                        'Register',
+                        style: style,
                       ),
-                      Text("Available for Blood Donation"),
-                    ],
-                  ),
+                      const Text(
+                        'Create your new account',
+                        style: style1,
+                      ),
+                      SizedBox(height: screenHeight * 0.02),
 
-                  SizedBox(height: screenHeight * 0.05),
+                      // EMAIL TEXTBOX
+                      Textbox(
+                        controller: emailController,
+                        obscureText: false,
+                        icons: Icons.mail,
+                        name: 'Email',
+                        errormsg: _isValidate ? 'Please enter Email' : null,
+                      ),
+                      SizedBox(height: screenHeight * 0.02),
 
-                  InkWell(
-                    onTap: validate,
-                    child: Center(
-                      child: Container(
-                        height: screenHeight * 0.06,
-                        width: screenWidth * 0.85,
-                        decoration: const BoxDecoration(
-                            color: Color.fromARGB(255, 12, 48, 26),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                        child: const Center(
-                          child: Text(
-                            'Signup',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 22,
-                                fontWeight: FontWeight.w500),
+                      // FULL NAME TEXTBOX
+                      Textbox(
+                        controller: nameController,
+                        obscureText: false,
+                        icons: Icons.person,
+                        name: 'Full name',
+                        errormsg: _isValidate ? 'Please enter Full name' : null,
+                      ),
+                      SizedBox(height: screenHeight * 0.02),
+
+                      // PHONE NUMBER TEXTBOX
+                      Textbox(
+                        controller: numberController,
+                        obscureText: false,
+                        icons: Icons.call,
+                        name: 'Phone number',
+                        errormsg:
+                            _isValidate ? 'Please enter Phone number' : null,
+                      ),
+                      SizedBox(height: screenHeight * 0.02),
+
+                      // PASSWORD TEXTBOX
+                      Textbox(
+                        controller: passwordController,
+                        obscureText: true,
+                        icons: Icons.lock,
+                        name: 'Create password',
+                        errormsg: _isValidate ? 'Please enter Password' : null,
+                      ),
+                      SizedBox(height: screenHeight * 0.02),
+
+                      // CONFIRM PASSWORD
+                      Textbox(
+                        controller: confirmPasswordController,
+                        obscureText: true,
+                        icons: Icons.lock,
+                        name: 'Confirm password',
+                        errormsg: _isValidate ? 'Please enter Password' : null,
+                      ),
+
+                      Row(
+                        children: [
+                          Checkbox(
+                            //checkbox positioned at left
+                            value: check1,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                check1 = value;
+                              });
+                            },
+                          ),
+                          Text("Available for Organ Donation"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(
+                            //checkbox positioned at left
+                            value: check2,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                check2 = value;
+                              });
+                            },
+                          ),
+                          Text("Available for Blood Donation"),
+                        ],
+                      ),
+
+                      SizedBox(height: screenHeight * 0.05),
+
+                      InkWell(
+                        onTap: validate,
+                        child: Center(
+                          child: Container(
+                            height: screenHeight * 0.06,
+                            width: screenWidth * 0.85,
+                            decoration: const BoxDecoration(
+                                color: Color.fromARGB(255, 12, 48, 26),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            child: const Center(
+                              child: Text(
+                                'Signup',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.01),
+                      SizedBox(height: screenHeight * 0.01),
 
-                  // FINAL TEXT
-                  Text(
-                    'By signing you agree to terms and \n      use and the privacy notice',
-                    style: TextStyle(
-                        fontSize: screenHeight * 0.018,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black87),
-                  )
-                ],
+                      // FINAL TEXT
+                      Text(
+                        'By signing you agree to terms and \n      use and the privacy notice',
+                        style: TextStyle(
+                            fontSize: screenHeight * 0.018,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black87),
+                      )
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }
