@@ -148,6 +148,7 @@ If you find this project helpful, please consider giving it a star on GitHub! Yo
 
 # License
 
+To know more [Click Here](LICENSE.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
