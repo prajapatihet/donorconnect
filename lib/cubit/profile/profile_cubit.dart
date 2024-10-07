@@ -1,4 +1,4 @@
-import 'package:donorconnect/cubit/profile_state.dart';
+import 'package:donorconnect/cubit/profile/profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
