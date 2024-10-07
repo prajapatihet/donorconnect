@@ -132,9 +132,22 @@
 9. **Wait for Review:**
    Your pull request will now be available for review by the project maintainers. They may provide feedback or ask for changes before merging your pull request into the main branch of the repository.
 
+### Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+### Contributing Guidelines
+
+We believe in the power of collaboration. If you have ideas to improve, feel free to contribute! Check out our [Contribution Guidelines](CONTRIBUTING.md) to get started.
+
 ⭐️ Support the Project
 If you find this project helpful, please consider giving it a star on GitHub! Your support helps to grow the project and reach more contributors.
 
 ## ❤️ Our Valuable Contributors
 ![Contributors](https://contrib.rocks/image?repo=prajapatihet/donorconnect)
+
+# License
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
