@@ -138,8 +138,7 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 
 ### Contributing Guidelines
 
-We believe in the power of collaboration. If you have ideas to improve, feel free to contribute! Check out our [Contribution Guidelines](Contributors.md
-) to get started.
+We believe in the power of collaboration. If you have ideas to improve, feel free to contribute! 
 
 ⭐️ Support the Project
 If you find this project helpful, please consider giving it a star on GitHub! Your support helps to grow the project and reach more contributors.
