@@ -47,9 +47,6 @@ class MyApp extends StatelessWidget {
             FirebaseFirestore.instance,
           ),
         ),
-        BlocProvider(
-          create: (context) => LocateBloodBanksCubit(BloodBankService()),
-        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
