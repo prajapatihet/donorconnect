@@ -41,48 +41,46 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAGUkF6Tshwo98-5jkpHXmCgH7v9ajdlu8',
-    appId: '1:933372458586:web:a5706b518bf0e782338a63',
-    messagingSenderId: '933372458586',
-    projectId: 'donorconnect-db692',
-    authDomain: 'donorconnect-db692.firebaseapp.com',
-    storageBucket: 'donorconnect-db692.appspot.com',
-    measurementId: 'G-4ZWZNK95ZQ',
+    apiKey: 'AIzaSyAbi2F2bIntslQpVVBxi7EgSygC2A_NawY',
+    appId: '1:445023469277:web:38f1cccfd07af2b9a52534',
+    messagingSenderId: '445023469277',
+    projectId: 'donor-connect-project',
+    authDomain: 'donor-connect-project.firebaseapp.com',
+    storageBucket: 'donor-connect-project.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAkksJqXhUEMUHWkyDPHjTedtJn9Q5D67M',
-    appId: '1:933372458586:android:2864d2f14d24c6b8338a63',
-    messagingSenderId: '933372458586',
-    projectId: 'donorconnect-db692',
-    storageBucket: 'donorconnect-db692.appspot.com',
+    apiKey: 'AIzaSyDprpAsw0AkuQmFG1Iczpb9N2gghyAFmqo',
+    appId: '1:445023469277:android:867d6fc40fb1d859a52534',
+    messagingSenderId: '445023469277',
+    projectId: 'donor-connect-project',
+    storageBucket: 'donor-connect-project.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCdVy6Z58r3knnb09lMQx1OJ-JKrk1j_iY',
-    appId: '1:933372458586:ios:40c246230aa20ee6338a63',
-    messagingSenderId: '933372458586',
-    projectId: 'donorconnect-db692',
-    storageBucket: 'donorconnect-db692.appspot.com',
+    apiKey: 'AIzaSyDSUZ2WdRgNAIgom1T74_8mg-4kutgrmi4',
+    appId: '1:445023469277:ios:9a17b6ec582928d9a52534',
+    messagingSenderId: '445023469277',
+    projectId: 'donor-connect-project',
+    storageBucket: 'donor-connect-project.appspot.com',
     iosBundleId: 'com.example.donorconnect',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCdVy6Z58r3knnb09lMQx1OJ-JKrk1j_iY',
-    appId: '1:933372458586:ios:40c246230aa20ee6338a63',
-    messagingSenderId: '933372458586',
-    projectId: 'donorconnect-db692',
-    storageBucket: 'donorconnect-db692.appspot.com',
+    apiKey: 'AIzaSyDSUZ2WdRgNAIgom1T74_8mg-4kutgrmi4',
+    appId: '1:445023469277:ios:9a17b6ec582928d9a52534',
+    messagingSenderId: '445023469277',
+    projectId: 'donor-connect-project',
+    storageBucket: 'donor-connect-project.appspot.com',
     iosBundleId: 'com.example.donorconnect',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAGUkF6Tshwo98-5jkpHXmCgH7v9ajdlu8',
-    appId: '1:933372458586:web:c575c759ad5f7981338a63',
-    messagingSenderId: '933372458586',
-    projectId: 'donorconnect-db692',
-    authDomain: 'donorconnect-db692.firebaseapp.com',
-    storageBucket: 'donorconnect-db692.appspot.com',
-    measurementId: 'G-XYXNJH0KPC',
+    apiKey: 'AIzaSyAbi2F2bIntslQpVVBxi7EgSygC2A_NawY',
+    appId: '1:445023469277:web:b05ec49f21bb5355a52534',
+    messagingSenderId: '445023469277',
+    projectId: 'donor-connect-project',
+    authDomain: 'donor-connect-project.firebaseapp.com',
+    storageBucket: 'donor-connect-project.appspot.com',
   );
 }

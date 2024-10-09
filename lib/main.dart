@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donorconnect/cubit/auth/auth_cubit.dart';
+import 'package:donorconnect/cubit/locate_blood_banks/locate_blood_banks_cubit.dart';
 import 'package:donorconnect/cubit/profile/profile_cubit.dart';
 import 'package:donorconnect/firebase_options.dart';
+import 'package:donorconnect/services/blood_bank_service.dart';
 import 'package:donorconnect/views/pages/main_home/homepage.dart';
 import 'package:donorconnect/views/pages/welcome/welcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,6 +47,9 @@ class MyApp extends StatelessWidget {
             FirebaseFirestore.instance,
           ),
         ),
+        BlocProvider(
+          create: (context) => LocateBloodBanksCubit(BloodBankService()),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
