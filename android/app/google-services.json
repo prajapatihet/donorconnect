@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "933372458586",
-    "project_id": "donorconnect-db692",
-    "storage_bucket": "donorconnect-db692.appspot.com"
+    "project_number": "445023469277",
+    "project_id": "donor-connect-project",
+    "storage_bucket": "donor-connect-project.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:933372458586:android:2864d2f14d24c6b8338a63",
+        "mobilesdk_app_id": "1:445023469277:android:867d6fc40fb1d859a52534",
         "android_client_info": {
           "package_name": "com.example.donorconnect"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAkksJqXhUEMUHWkyDPHjTedtJn9Q5D67M"
+          "current_key": "AIzaSyDprpAsw0AkuQmFG1Iczpb9N2gghyAFmqo"
         }
       ],
       "services": {
