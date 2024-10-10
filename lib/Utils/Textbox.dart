@@ -22,7 +22,7 @@ class Textbox extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: TextFormField(
         obscureText: obscureText,
-        cursorColor: Color.fromRGBO(18, 79, 43, 1),
+        cursorColor: const Color.fromRGBO(18, 79, 43, 1),
         style: const TextStyle(
           color: Color.fromARGB(255, 18, 79, 43),
           fontSize: 16,

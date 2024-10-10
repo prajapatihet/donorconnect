@@ -89,7 +89,7 @@ class AuthCubit extends Cubit<AuthState> {
               UserModel.fromMap(snapshot.data() as Map<String, dynamic>);
           emit(Authenticated(user));
         } else {
-          emit(AuthError('User data not found'));
+          emit(const AuthError('User data not found'));
         }
       },
       onError: (error) {

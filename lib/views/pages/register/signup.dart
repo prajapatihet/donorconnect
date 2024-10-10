@@ -219,7 +219,9 @@ class _SignuppageState extends State<Signuppage> {
                         obscureText: false,
                         icons: Icons.mail,
                         name: 'Email',
-                         errormsg:  _isEmailValid ? 'Email is Wrong or Blank, Kindly Enter correct Email' : null,
+                        errormsg: _isEmailValid
+                            ? 'Email is Wrong or Blank, Kindly Enter correct Email'
+                            : null,
                       ),
                       SizedBox(height: screenHeight * 0.02),
 
@@ -239,7 +241,9 @@ class _SignuppageState extends State<Signuppage> {
                         obscureText: false,
                         icons: Icons.call,
                         name: 'Phone number',
-                        errormsg: _isPhoneValid ? 'Phone number must be of 10 Digit' : null,
+                        errormsg: _isPhoneValid
+                            ? 'Phone number must be of 10 Digit'
+                            : null,
                       ),
                       SizedBox(height: screenHeight * 0.02),
 
@@ -249,7 +253,9 @@ class _SignuppageState extends State<Signuppage> {
                         obscureText: true,
                         icons: Icons.lock,
                         name: 'Create password',
-                        errormsg: _isPasswordValid ? 'Password must be 8 character long and must have aleast 1 uppercase,1 Lowercase,1 digit,1 special character' : null,
+                        errormsg: _isPasswordValid
+                            ? 'Password must be 8 character long and must have aleast 1 uppercase,1 Lowercase,1 digit,1 special character'
+                            : null,
                       ),
                       SizedBox(height: screenHeight * 0.02),
 
@@ -259,7 +265,9 @@ class _SignuppageState extends State<Signuppage> {
                         obscureText: true,
                         icons: Icons.lock,
                         name: 'Confirm password',
-                        errormsg: _isConfirmPasswordValid ? 'Password is not matching' : null,
+                        errormsg: _isConfirmPasswordValid
+                            ? 'Password is not matching'
+                            : null,
                       ),
 
                       Row(
@@ -273,7 +281,7 @@ class _SignuppageState extends State<Signuppage> {
                               });
                             },
                           ),
-                          Text("Available for Organ Donation"),
+                          const Text("Available for Organ Donation"),
                         ],
                       ),
                       Row(
@@ -287,7 +295,7 @@ class _SignuppageState extends State<Signuppage> {
                               });
                             },
                           ),
-                          Text("Available for Blood Donation"),
+                          const Text("Available for Blood Donation"),
                         ],
                       ),
 

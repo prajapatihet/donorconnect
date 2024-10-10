@@ -4,8 +4,10 @@ import 'dart:io'; // For handling file uploads
 import '../services/verification_service.dart'; // Firebase service for verification
 
 class VerificationForm extends StatefulWidget {
+  const VerificationForm({super.key});
+
   @override
-  _VerificationFormState createState() => _VerificationFormState();
+  State<VerificationForm> createState() => _VerificationFormState();
 }
 
 class _VerificationFormState extends State<VerificationForm> {
@@ -42,7 +44,7 @@ class _VerificationFormState extends State<VerificationForm> {
     if (_formKey.currentState!.validate()) {
       if (_idDocument == null || _medicalCertificate == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Please upload both documents.')),
+          const SnackBar(content: Text('Please upload both documents.')),
         );
         return;
       }
@@ -59,7 +61,7 @@ class _VerificationFormState extends State<VerificationForm> {
         );
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Documents submitted successfully!')),
+          const SnackBar(content: Text('Documents submitted successfully!')),
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -77,7 +79,7 @@ class _VerificationFormState extends State<VerificationForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Donor/Recipient Verification'),
+        title: const Text('Donor/Recipient Verification'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -86,31 +88,31 @@ class _VerificationFormState extends State<VerificationForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Upload ID Document'),
-              SizedBox(height: 10),
+              const Text('Upload ID Document'),
+              const SizedBox(height: 10),
               _idDocument == null
-                  ? Text('No document selected.')
+                  ? const Text('No document selected.')
                   : Image.file(_idDocument!, height: 100),
               ElevatedButton(
                 onPressed: _pickIdDocument,
-                child: Text('Select ID Document'),
+                child: const Text('Select ID Document'),
               ),
-              SizedBox(height: 20),
-              Text('Upload Medical Certificate'),
-              SizedBox(height: 10),
+              const SizedBox(height: 20),
+              const Text('Upload Medical Certificate'),
+              const SizedBox(height: 10),
               _medicalCertificate == null
-                  ? Text('No document selected.')
+                  ? const Text('No document selected.')
                   : Image.file(_medicalCertificate!, height: 100),
               ElevatedButton(
                 onPressed: _pickMedicalCertificate,
-                child: Text('Select Medical Certificate'),
+                child: const Text('Select Medical Certificate'),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               _isSubmitting
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : ElevatedButton(
                       onPressed: _submitVerification,
-                      child: Text('Submit Verification'),
+                      child: const Text('Submit Verification'),
                     ),
             ],
           ),

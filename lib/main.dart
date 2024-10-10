@@ -6,7 +6,7 @@ import 'package:donorconnect/firebase_options.dart';
 import 'package:donorconnect/services/blood_bank_service.dart';
 import 'package:donorconnect/views/pages/main_home/homepage.dart';
 import 'package:donorconnect/views/pages/welcome/welcome_screen.dart';
-import 'package:donorconnect/views/pages/verification/verification_form.dart'; // Import verification form
+import 'package:donorconnect/views/verificationform.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +59,8 @@ class MyApp extends StatelessWidget {
             : const FrontPage(),
         // You can add routes for the verification form
         routes: {
-          '/verification': (context) => VerificationForm(), // Add route for verification form
+          '/verification': (context) =>
+              const VerificationForm(), // Add route for verification form
         },
       ),
     );
