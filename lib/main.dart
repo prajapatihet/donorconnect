@@ -6,11 +6,11 @@ import 'package:donorconnect/firebase_options.dart';
 import 'package:donorconnect/services/blood_bank_service.dart';
 import 'package:donorconnect/views/pages/main_home/homepage.dart';
 import 'package:donorconnect/views/pages/welcome/welcome_screen.dart';
+import 'package:donorconnect/views/pages/verification/verification_form.dart'; // Import verification form
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
@@ -49,13 +49,18 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LocateBloodBanksCubit(BloodBankService()),
-        )
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        // Main route selection
         home: (token != null && !JwtDecoder.isExpired(token!))
             ? HomePage(token: token!)
             : const FrontPage(),
+        // You can add routes for the verification form
+        routes: {
+          '/verification': (context) => VerificationForm(), // Add route for verification form
+        },
       ),
     );
   }
