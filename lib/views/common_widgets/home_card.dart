@@ -25,7 +25,7 @@ class HomeCard extends StatelessWidget {
       child: Card(
         semanticContainer: true,
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        elevation: 0.5,
+        elevation: 0.4,
         surfaceTintColor: const Color.fromARGB(255, 255, 152, 145),
         child: Padding(
           padding: const EdgeInsets.all(6.0),
@@ -53,7 +53,6 @@ class HomeCard extends StatelessWidget {
                           style: GoogleFonts.montserrat(
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
-
                           ),
                         ),
                         SizedBox(
@@ -64,7 +63,6 @@ class HomeCard extends StatelessWidget {
                           style: GoogleFonts.montserrat(
                             fontSize: 13.0,
                             fontWeight: FontWeight.w400,
-
                           ),
                         ),
                       ],

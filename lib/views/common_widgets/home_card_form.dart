@@ -25,7 +25,7 @@ class HomeCardConst extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           color: col,
           onPressed: onPressed,
-          padding: const EdgeInsets.all(5),
+          padding: const EdgeInsets.all(4),
           child: Text(
             title,
             style: GoogleFonts.montserrat(
