@@ -5,6 +5,7 @@ import 'package:donorconnect/cubit/auth/auth_state.dart';
 import 'package:donorconnect/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final FirebaseAuth _auth;
@@ -23,7 +24,10 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> loginUser(String email, String password) async {
     emit(AuthLoading());
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      // After signing in, get the user data
+      _getUserData(userCredential.user!.uid);
     } catch (e) {
       emit(AuthError(e.toString()));
     }
@@ -58,6 +62,12 @@ class AuthCubit extends Cubit<AuthState> {
           .collection('users')
           .doc(userCredential.user!.uid)
           .set(userModel.toMap());
+
+      // Save user data to SharedPreferences
+      await _saveUserToPrefs(userCredential.user!.uid, userModel);
+      
+      emit(Authenticated(userModel)); // Emit authenticated state with user model
+
     } catch (e) {
       emit(AuthError(e.toString()));
     }
@@ -67,9 +77,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
     try {
       await _auth.signOut();
-      emit(
-        Unauthenticated(),
-      );
+      emit(Unauthenticated());
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -88,6 +96,10 @@ class AuthCubit extends Cubit<AuthState> {
           UserModel user =
               UserModel.fromMap(snapshot.data() as Map<String, dynamic>);
           emit(Authenticated(user));
+          print(user.name);
+          print(user.email);
+          // Save user name to SharedPreferences
+          _saveUserNameToPrefs(user.uid, user.name);
         } else {
           emit(const AuthError('User data not found'));
         }
@@ -96,5 +108,23 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthError(error.toString()));
       },
     );
+  }
+
+  Future<void> _saveUserNameToPrefs(String userId, String name) async {
+    final prefs = await SharedPreferences.getInstance();
+  
+    print(name);
+    await prefs.setString('${userId}_name', name);
+  }
+
+  Future<void> _saveUserToPrefs(String userId, UserModel userModel) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    print(userModel.name);
+    await prefs.setString('${userId}_name', userModel.name);
+    await prefs.setString('${userId}_email', userModel.email);
+    await prefs.setString('${userId}_phone', userModel.phone);
+    await prefs.setBool('${userId}_isOrganDonor', userModel.isOrganDonor);
+    await prefs.setBool('${userId}_isBloodDonor', userModel.isBloodDonor);
   }
 }
