@@ -1,3 +1,4 @@
+import 'package:donorconnect/language/helper/language_extention.dart';
 import 'package:donorconnect/views/pages/main_home/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NavigationController(widget.name ?? "No Name", widget.email!));
+    final _text = context.localizedString;
+    final controller =
+        Get.put(NavigationController(widget.name ?? "No Name", widget.email!));
 
     return Scaffold(
       bottomNavigationBar: Obx(
@@ -34,29 +37,30 @@ class _HomePageState extends State<HomePage> {
           onDestinationSelected: (index) {
             controller.selectedIndex.value = index;
           },
-          destinations: const [
+          destinations: [
             NavigationDestination(
-              icon: Icon(Icons.home),
-              label: "Home",
+              icon: const Icon(Icons.home),
+              label: _text.home,
             ),
             NavigationDestination(
-              icon: Icon(Icons.search),
-              label: "Search",
+              icon: const Icon(Icons.search),
+              label: _text.search,
             ),
             NavigationDestination(
-              icon: Icon(Icons.event),
-              label: "Camps",
+              icon: const Icon(Icons.event),
+              label: _text.camps,
             ),
             NavigationDestination(
-              icon: Icon(Icons.person),
-              label: "Profile",
+              icon: const Icon(Icons.person),
+              label: _text.profile,
             ),
           ],
         ),
       ),
       body: Obx(
         () => AnimatedSwitcher(
-          duration: const Duration(milliseconds: 800),  // Duration of the fade effect
+          duration:
+              const Duration(milliseconds: 800), // Duration of the fade effect
           transitionBuilder: (Widget child, Animation<double> animation) {
             return FadeTransition(opacity: animation, child: child);
           },

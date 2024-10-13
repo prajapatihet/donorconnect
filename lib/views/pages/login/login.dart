@@ -1,6 +1,7 @@
 import 'package:donorconnect/Utils/show_snackbar.dart';
 import 'package:donorconnect/cubit/auth/auth_cubit.dart';
 import 'package:donorconnect/cubit/auth/auth_state.dart';
+import 'package:donorconnect/language/helper/language_extention.dart';
 import 'package:donorconnect/views/pages/main_home/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       showSnackBar(
         context,
-        'Please enter your email and password',
+        context.localizedString.please_enter_your_email_and_password,
       );
       setState(() {
         _isValidate = true;
@@ -54,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final _text = context.localizedString;
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
 
@@ -117,8 +119,8 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text('Welcome Back', style: style),
-                      const Text('Log in to your account', style: style1),
+                      Text(_text.welcome_back, style: style),
+                      Text(_text.log_in_to_your_account, style: style1),
                       SizedBox(
                         height: screenHeight * 0.03,
                       ),
@@ -130,8 +132,10 @@ class _LoginPageState extends State<LoginPage> {
                             controller: emailController,
                             obscureText: false,
                             icons: Icons.email,
-                            name: 'Email',
-                            errormsg: _isValidate ? 'Please enter Email' : null,
+                            name: _text.email,
+                            errormsg: _isValidate
+                                ? _text.email_field_error_text
+                                : null,
                           ),
 
                           // PASSWORD
@@ -142,9 +146,9 @@ class _LoginPageState extends State<LoginPage> {
                             controller: passwordController,
                             obscureText: true,
                             icons: Icons.lock,
-                            name: 'Password',
+                            name: _text.password,
                             errormsg:
-                                _isValidate ? 'Please enter Password' : null,
+                                _isValidate ? _text.password_error_text : null,
                           ),
                         ],
                       ),
@@ -154,8 +158,8 @@ class _LoginPageState extends State<LoginPage> {
                         padding: EdgeInsets.only(left: screenWidth * 0.45),
                         child: TextButton(
                           onPressed: () {},
-                          child: const Text(
-                            'Forgot password?',
+                          child: Text(
+                            _text.forget_password,
                             style: TextStyle(
                                 color: Color(0xff092414),
                                 fontSize: 16,
@@ -179,9 +183,9 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(30)),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                'Login',
+                                _text.login,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 22,
@@ -196,8 +200,8 @@ class _LoginPageState extends State<LoginPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            'Don\'t have the account?',
+                          Text(
+                            _text.do_not_have_account,
                             style: TextStyle(
                                 color: Colors.black54,
                                 fontSize: 16,
@@ -213,8 +217,8 @@ class _LoginPageState extends State<LoginPage> {
                                     builder: (context) => const Signuppage(),
                                   ));
                             },
-                            child: const Text(
-                              'Sign up',
+                            child: Text(
+                              _text.signup,
                               style: TextStyle(
                                   color: Color(0xff092414),
                                   fontSize: 16,

@@ -1,5 +1,7 @@
+import 'package:donorconnect/cubit/auth/auth_cubit.dart';
 import 'package:donorconnect/cubit/profile/profile_cubit.dart';
 import 'package:donorconnect/cubit/profile/profile_state.dart';
+import 'package:donorconnect/language/helper/language_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,11 +30,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _text = context.localizedString;
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: const Text('Profile'),
+        title: Text(_text.profile),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.read<AuthCubit>().signOut(context);
+            },
+            icon: const Icon(
+              Icons.logout,
+            ),
+          ),
+        ],
       ),
       body: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
@@ -53,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Welcome to your profile',
+                        _text.welcome_to_your_profile,
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.grey[600],
@@ -67,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   TextFormField(
                     initialValue: state.medicalHistory,
                     decoration:
-                        const InputDecoration(labelText: 'Medical History'),
+                        InputDecoration(labelText: _text.medical_history),
                     onChanged: (value) => context
                         .read<ProfileCubit>()
                         .updateMedicalHistory(value),
@@ -78,7 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   TextFormField(
                     initialValue: state.currentMedications,
                     decoration:
-                        const InputDecoration(labelText: 'Current Medications'),
+                        InputDecoration(labelText: _text.current_medications),
                     onChanged: (value) => context
                         .read<ProfileCubit>()
                         .updateCurrentMedications(value),
@@ -88,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // Allergies
                   TextFormField(
                     initialValue: state.allergies,
-                    decoration: const InputDecoration(labelText: 'Allergies'),
+                    decoration: InputDecoration(labelText: _text.allergies),
                     onChanged: (value) =>
                         context.read<ProfileCubit>().updateAllergies(value),
                   ),
@@ -110,13 +121,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onChanged: (value) {
                       context.read<ProfileCubit>().updateBloodType(value ?? '');
                     },
-                    decoration: const InputDecoration(labelText: 'Blood Type'),
+                    decoration: InputDecoration(labelText: _text.blood_type),
                   ),
                   const SizedBox(height: 16),
 
                   // Organ Donor
                   SwitchListTile(
-                    title: const Text('Organ Donor'),
+                    title: Text(_text.organ_donor),
                     value: state.isOrganDonor,
                     onChanged: (value) {
                       context
@@ -127,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   // Blood Donor
                   SwitchListTile(
-                    title: const Text('Blood Donor'),
+                    title: Text(_text.blood_donor),
                     value: state.isBloodDonor,
                     onChanged: (value) {
                       context
@@ -139,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   // Notification Settings
                   SwitchListTile(
-                    title: const Text('Enable Donation Notifications'),
+                    title: Text(_text.enable_donation_notifications),
                     value: state.notificationsEnabled,
                     onChanged: (value) {
                       context.read<ProfileCubit>().toggleNotifications(value);
@@ -156,11 +167,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             .read<ProfileCubit>()
                             .saveProfile(widget.userId);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Profile Saved')),
+                          SnackBar(content: Text(_text.profile_saved)),
                         );
                       }
                     },
-                    child: const Text('Save Profile'),
+                    child: Text(_text.save_profile),
                   ),
                 ],
               ),
