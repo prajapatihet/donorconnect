@@ -155,7 +155,7 @@ class _SignuppageState extends State<Signuppage> {
               context,
               MaterialPageRoute(
                 builder: (context) => HomePage(
-                  name: nameController.text.trim(),
+                  name: nameController.text,
                   email: emailController.text.trim(),
                 ),
               ),

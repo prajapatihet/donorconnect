@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final controller =
         Get.put(NavigationController(widget.name ?? "No Name", widget.email!));
+        print(widget.name);
     return Scaffold(
       bottomNavigationBar: Obx(
         () => NavigationBar(
