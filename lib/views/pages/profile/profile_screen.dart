@@ -30,6 +30,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
         title: const Text('Profile'),
       ),
       body: BlocBuilder<ProfileCubit, ProfileState>(

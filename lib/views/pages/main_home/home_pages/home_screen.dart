@@ -75,9 +75,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const LocateBloodBanks(),
-                      ));
+                       PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) => const LocateBloodBanks(),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+                transitionDuration: const Duration(milliseconds: 900), // Adjust duration as needed
+              ),);
+                    
                 },
               ),
               HomeCard(

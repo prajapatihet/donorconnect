@@ -22,8 +22,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final controller =
-        Get.put(NavigationController(widget.name ?? "No Name", widget.email!));
+    final controller = Get.put(NavigationController(widget.name ?? "No Name", widget.email!));
+
     return Scaffold(
       bottomNavigationBar: Obx(
         () => NavigationBar(
@@ -55,7 +55,13 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: Obx(
-        () => controller.getScreens()[controller.selectedIndex.value],
+        () => AnimatedSwitcher(
+          duration: const Duration(milliseconds: 800),  // Duration of the fade effect
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+          child: controller.getScreens()[controller.selectedIndex.value],
+        ),
       ),
     );
   }

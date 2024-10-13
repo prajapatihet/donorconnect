@@ -70,12 +70,20 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is Authenticated) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
-              MaterialPageRoute(
-                builder: (context) => HomePage(
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) => HomePage(
                   email: emailController.text,
+                  name: state.user.name, // Passing the actual user name from state
                 ),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+                transitionDuration: const Duration(milliseconds: 900), // Adjust duration as needed
               ),
             );
           }
@@ -95,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
               Image.asset(
                 'assets/images/login.jpg',
                 width: double.infinity,
-                height: double.infinity,
+                height: 670,
                 fit: BoxFit.cover,
               ),
 
