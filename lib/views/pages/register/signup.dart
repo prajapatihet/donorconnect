@@ -155,7 +155,7 @@ class _SignuppageState extends State<Signuppage> {
               context,
               PageRouteBuilder(
                 pageBuilder: (context, animation, secondaryAnimation) => HomePage(
-                  name: nameController.text.trim(),
+                  name: nameController.text,
                   email: emailController.text.trim(),
                 ),
                 transitionsBuilder: (context, animation, secondaryAnimation, child) {

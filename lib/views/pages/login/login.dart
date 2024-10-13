@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
               PageRouteBuilder(
                 pageBuilder: (context, animation, secondaryAnimation) => HomePage(
                   email: emailController.text,
-                  name: state.user.name, // Passing the actual user name from state
+                  name: state.user.name,
                 ),
                 transitionsBuilder: (context, animation, secondaryAnimation, child) {
                   return FadeTransition(
