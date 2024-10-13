@@ -1,3 +1,4 @@
+import 'package:donorconnect/secrets.dart';
 import 'package:donorconnect/views/pages/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,8 @@ import 'package:donorconnect/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../views/pages/register/signup.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final FirebaseAuth _auth;
@@ -20,6 +23,25 @@ class AuthCubit extends Cubit<AuthState> {
       }
     });
   }
+  Route _createRoute(Widget page) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = 0.0;
+        const end = 6.0;
+        const curve = Curves.easeInOut;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        return FadeTransition(
+          opacity: animation.drive(tween),
+          child: child,
+        );
+      },
+      transitionDuration:
+          const Duration(milliseconds: 700), // Increase the duration to 700ms
+    );
+  }
 
   Future<void> loginUser(String email, String password) async {
     emit(AuthLoading());
@@ -28,8 +50,14 @@ class AuthCubit extends Cubit<AuthState> {
           email: email, password: password);
       // After signing in, get the user data
       _getUserData(userCredential.user!.uid);
-    } catch (e) {
-      emit(AuthError(e.toString()));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        emit(const AuthError("No User Found for that Email"));
+      } else if (e.code == 'invalid-credential') {
+        emit(const AuthError("Invalid mail or password Provided by User"));
+      } else {
+        emit(AuthError(e.toString()));
+      }
     }
   }
 
@@ -65,11 +93,18 @@ class AuthCubit extends Cubit<AuthState> {
 
       // Save user data to SharedPreferences
       await _saveUserToPrefs(userCredential.user!.uid, userModel);
-      
-      emit(Authenticated(userModel)); // Emit authenticated state with user model
 
-    } catch (e) {
-      emit(AuthError(e.toString()));
+      emit(
+          Authenticated(userModel)); // Emit authenticated state with user model
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        emit(const AuthError("Password Provided is too Weak"));
+      } else if (e.code == 'email-already-in-use') {
+        emit(const AuthError("User with this credential already exists"));
+      } else {
+        print(e.code);
+        emit(AuthError(e.toString()));
+      }
     }
   }
 
@@ -112,7 +147,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> _saveUserNameToPrefs(String userId, String name) async {
     final prefs = await SharedPreferences.getInstance();
-  
+
     print(name);
     await prefs.setString('${userId}_name', name);
   }
