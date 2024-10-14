@@ -1,8 +1,7 @@
-
 import 'package:donorconnect/cubit/locate_blood_banks/locate_blood_banks_cubit.dart';
+import 'package:donorconnect/language/helper/language_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 class LocateBloodBanks extends StatefulWidget {
   const LocateBloodBanks({super.key});
@@ -12,23 +11,19 @@ class LocateBloodBanks extends StatefulWidget {
 }
 
 class _LocateBloodBanksState extends State<LocateBloodBanks> {
-
   TextEditingController cityController = TextEditingController();
   TextEditingController districtController = TextEditingController();
   TextEditingController stateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final _text = context.localizedString;
     // Fetch data when the page is built
     context.read<LocateBloodBanksCubit>().fetchBloodBanks();
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back_ios)),
-        centerTitle: true,
-        title: const Text('Locate Blood Banks'),
+        title: Text(_text.locate_blood_bank),
       ),
       body: Column(
         children: [
@@ -39,7 +34,7 @@ class _LocateBloodBanksState extends State<LocateBloodBanks> {
                 Expanded(
                   child: TextField(
                     controller: cityController,
-                    decoration: const InputDecoration(labelText: 'City'),
+                    decoration: InputDecoration(labelText: _text.city),
                     onChanged: (value) => _filterBloodBanks(),
                   ),
                 ),
@@ -47,7 +42,7 @@ class _LocateBloodBanksState extends State<LocateBloodBanks> {
                 Expanded(
                   child: TextField(
                     controller: districtController,
-                    decoration: const InputDecoration(labelText: 'District'),
+                    decoration: InputDecoration(labelText: _text.district),
                     onChanged: (value) => _filterBloodBanks(),
                   ),
                 ),
@@ -55,7 +50,7 @@ class _LocateBloodBanksState extends State<LocateBloodBanks> {
                 Expanded(
                   child: TextField(
                     controller: stateController,
-                    decoration: const InputDecoration(labelText: 'State'),
+                    decoration: InputDecoration(labelText: _text.state),
                     onChanged: (value) => _filterBloodBanks(),
                   ),
                 ),
@@ -90,19 +85,22 @@ class _LocateBloodBanksState extends State<LocateBloodBanks> {
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 8),
-                              Text('State: ${bloodBank['_state'] ?? 'N/A'}'),
                               Text(
-                                  'District: ${bloodBank['_district'] ?? 'N/A'}'),
-                              Text('City: ${bloodBank['_city'] ?? 'N/A'}'),
+                                  '${_text.state}: ${bloodBank['_state'] ?? 'N/A'}'),
                               Text(
-                                  'Contact: ${bloodBank['_contact_no'] ?? 'N/A'}'),
-                              Text('Email: ${bloodBank['_email'] ?? 'N/A'}'),
+                                  '${_text.district}: ${bloodBank['_district'] ?? 'N/A'}'),
                               Text(
-                                  'Nodal Officer: ${bloodBank['_nodal_officer_'] ?? 'N/A'}'),
+                                  '${_text.city}: ${bloodBank['_city'] ?? 'N/A'}'),
                               Text(
-                                  'Contact Nodal Officer: ${bloodBank['_mobile_nodal_officer'] ?? 'N/A'}'),
+                                  '${_text.contact}: ${bloodBank['_contact_no'] ?? 'N/A'}'),
                               Text(
-                                  'Category: ${bloodBank['_category'] ?? 'N/A'}'),
+                                  '${_text.email}: ${bloodBank['_email'] ?? 'N/A'}'),
+                              Text(
+                                  '${_text.nodal_officer}: ${bloodBank['_nodal_officer_'] ?? 'N/A'}'),
+                              Text(
+                                  '${_text.contact_nodal_officer}: ${bloodBank['_mobile_nodal_officer'] ?? 'N/A'}'),
+                              Text(
+                                  '${_text.category}: ${bloodBank['_category'] ?? 'N/A'}'),
                             ],
                           ),
                         ),
@@ -112,7 +110,7 @@ class _LocateBloodBanksState extends State<LocateBloodBanks> {
                 } else if (state is LocateBloodBanksError) {
                   return Center(child: Text('Error: ${state.error}'));
                 } else {
-                  return const Center(child: Text('No data available.'));
+                  return Center(child: Text(_text.no_data_available));
                 }
               },
             ),
@@ -141,6 +139,5 @@ class _LocateBloodBanksState extends State<LocateBloodBanks> {
     districtController.dispose();
     stateController.dispose();
     super.dispose();
-
   }
 }
