@@ -40,6 +40,7 @@ dependencies:
   equatable: ^2.0.5
   firebase_storage: ^12.3.3
   image_picker: ^1.1.2
+  custom_navigation_bar: ^0.8.2
 
 dev_dependencies:
   flutter_test:
