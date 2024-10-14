@@ -1,7 +1,9 @@
-import 'package:donorconnect/language/helper/language_extention.dart';
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:donorconnect/views/pages/main_home/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../profile/profile_screen.dart';
+import 'home_pages/home_screen.dart';
 
 class HomePage extends StatefulWidget {
   final token;
@@ -15,58 +17,101 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void dispose() {
-    Get.delete<NavigationController>();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   Get.delete<NavigationController>();
+  //   super.dispose();
+  // }
+  // late ScrollController controller;
+  //
+  /// variables
+  int _currentIndex = 0;
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   controller = ScrollController();
+  // }
+  //
+  // @override
+  // void dispose() {
+  //   controller.dispose;
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final _text = context.localizedString;
-    final controller =
-        Get.put(NavigationController(widget.name ?? "No Name", widget.email!));
+    final PageController pageController = PageController(initialPage: 0);
+    final pages = [
+      const HomeScreen(),
+      const HomeScreen(),
+      const HomeScreen(),
+      ProfileScreen(
+        name: widget.name ?? "No Name",
+        userId: widget.email!,
+      ),
+    ];
 
     return Scaffold(
-      bottomNavigationBar: Obx(
-        () => NavigationBar(
-          height: 70,
-          elevation: 3,
-          surfaceTintColor: Colors.blue,
-          selectedIndex: controller.selectedIndex.value,
-          onDestinationSelected: (index) {
-            controller.selectedIndex.value = index;
-          },
-          destinations: [
-            NavigationDestination(
-              icon: const Icon(Icons.home),
-              label: _text.home,
+      bottomNavigationBar: CustomNavigationBar(
+        scaleFactor: 0.2,
+        strokeColor: Colors.blueGrey,
+        iconSize: 24,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        selectedColor: Colors.blue,
+        unSelectedColor: Colors.blue.withOpacity(0.4),
+        isFloating: false,
+        currentIndex: _currentIndex,
+        scaleCurve: Curves.bounceOut,
+        bubbleCurve: Curves.easeInOut,
+        onTap: (int newIndex) {
+          setState(() {
+            _currentIndex = newIndex;
+            pageController.animateToPage(newIndex,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.fastOutSlowIn);
+          });
+        },
+        items: [
+          CustomNavigationBarItem(
+            icon: const Icon(Icons.home),
+            title: const Text(
+              "Home",
+              style: TextStyle(fontSize: 12),
             ),
-            NavigationDestination(
+          ),
+          CustomNavigationBarItem(
               icon: const Icon(Icons.search),
-              label: _text.search,
-            ),
-            NavigationDestination(
+              title: const Text(
+                "Search",
+                style: TextStyle(fontSize: 12),
+              )),
+          CustomNavigationBarItem(
               icon: const Icon(Icons.event),
-              label: _text.camps,
-            ),
-            NavigationDestination(
+              title: const Text(
+                "Camps",
+                style: TextStyle(fontSize: 12),
+              )),
+          CustomNavigationBarItem(
               icon: const Icon(Icons.person),
-              label: _text.profile,
-            ),
-          ],
-        ),
+              title: const Text(
+                "Profile",
+                style: TextStyle(fontSize: 12),
+              )),
+        ],
       ),
-      body: Obx(
-        () => AnimatedSwitcher(
-          duration:
-              const Duration(milliseconds: 800), // Duration of the fade effect
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            return FadeTransition(opacity: animation, child: child);
+      body: PageView.builder(
+          controller: pageController,
+          onPageChanged: (int newIndex) {
+            setState(() {
+              _currentIndex = newIndex;
+            });
           },
-          child: controller.getScreens()[controller.selectedIndex.value],
-        ),
-      ),
+          itemCount: 4,
+          itemBuilder: (BuildContext context, int index) {
+            return pages[index];
+          }),
     );
   }
 }
