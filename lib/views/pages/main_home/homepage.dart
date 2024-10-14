@@ -1,9 +1,8 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
-import 'package:donorconnect/views/pages/main_home/bottom_nav.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../profile/profile_screen.dart';
 import 'home_pages/home_screen.dart';
+import 'package:donorconnect/language/helper/language_extention.dart';
 
 class HomePage extends StatefulWidget {
   final token;
@@ -42,6 +41,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final PageController pageController = PageController(initialPage: 0);
+    final _text = context.localizedString;
     final pages = [
       const HomeScreen(),
       const HomeScreen(),
@@ -76,28 +76,28 @@ class _HomePageState extends State<HomePage> {
         items: [
           CustomNavigationBarItem(
             icon: const Icon(Icons.home),
-            title: const Text(
-              "Home",
-              style: TextStyle(fontSize: 12),
+            title: Text(
+              _text.home,
+              style: const TextStyle(fontSize: 12),
             ),
           ),
           CustomNavigationBarItem(
               icon: const Icon(Icons.search),
-              title: const Text(
-                "Search",
-                style: TextStyle(fontSize: 12),
+              title: Text(
+                _text.search,
+                style: const TextStyle(fontSize: 12),
               )),
           CustomNavigationBarItem(
               icon: const Icon(Icons.event),
-              title: const Text(
-                "Camps",
-                style: TextStyle(fontSize: 12),
+              title: Text(
+                _text.camps,
+                style: const TextStyle(fontSize: 12),
               )),
           CustomNavigationBarItem(
               icon: const Icon(Icons.person),
-              title: const Text(
-                "Profile",
-                style: TextStyle(fontSize: 12),
+              title: Text(
+                _text.profile,
+                style: const TextStyle(fontSize: 12),
               )),
         ],
       ),
