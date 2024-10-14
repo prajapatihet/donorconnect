@@ -1,3 +1,4 @@
+import 'package:donorconnect/language/helper/language_extention.dart';
 import 'package:flutter/material.dart';
 import '../login/login.dart';
 import '../register/signup.dart';
@@ -19,13 +20,15 @@ class FrontPage extends StatelessWidget {
           const end = 6.0;
           const curve = Curves.easeInOut;
 
-          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
           return FadeTransition(
             opacity: animation.drive(tween),
             child: child,
           );
         },
-         transitionDuration: const Duration(milliseconds: 700), // Increase the duration to 700ms
+        transitionDuration:
+            const Duration(milliseconds: 700), // Increase the duration to 700ms
       );
     }
 
@@ -44,23 +47,22 @@ class FrontPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               InkWell(
-                onTap: () => Navigator.of(context).push(_createRoute(const Signuppage())),
+                onTap: () => Navigator.of(context)
+                    .push(_createRoute(const Signuppage())),
                 child: Center(
                   child: Container(
                     height: screenHeight * 0.07,
                     width: screenWidth * 0.85,
                     decoration: const BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                    ),
-                    child: const Center(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    child: Center(
                       child: Text(
-                        'Sign up',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        context.localizedString.signup,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                   ),
@@ -70,23 +72,23 @@ class FrontPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(bottom: screenHeight * 0.04),
                 child: InkWell(
-                  onTap: () => Navigator.of(context).pushReplacement(_createRoute(const LoginPage())),
+                  onTap: () => Navigator.of(context)
+                      .pushReplacement(_createRoute(const LoginPage())),
                   child: Center(
                     child: Container(
                       height: screenHeight * 0.07,
                       width: screenWidth * 0.85,
                       decoration: BoxDecoration(
-                        color: Colors.green.shade900,
-                        borderRadius: const BorderRadius.all(Radius.circular(30)),
-                      ),
-                      child: const Center(
+                          color: Colors.green.shade900,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30))),
+                      child: Center(
                         child: Text(
-                          'Login',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          context.localizedString.login,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
                     ),

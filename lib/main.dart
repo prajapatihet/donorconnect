@@ -3,6 +3,9 @@ import 'package:donorconnect/cubit/auth/auth_cubit.dart';
 import 'package:donorconnect/cubit/locate_blood_banks/locate_blood_banks_cubit.dart';
 import 'package:donorconnect/cubit/profile/profile_cubit.dart';
 import 'package:donorconnect/firebase_options.dart';
+import 'package:donorconnect/language/cubit/language_cubit.dart';
+import 'package:donorconnect/language/helper/language.dart';
+import 'package:donorconnect/language/services/language_repositoty.dart';
 import 'package:donorconnect/services/blood_bank_service.dart';
 import 'package:donorconnect/views/pages/main_home/homepage.dart';
 import 'package:donorconnect/views/pages/welcome/welcome_screen.dart';
@@ -13,10 +16,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:riverpod/riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await LanguageRepository.init();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return const Material();
@@ -50,19 +56,28 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LocateBloodBanksCubit(BloodBankService()),
         ),
+        BlocProvider(
+          create: (context) => LanguageCubit()..initilize(),
+        ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        // Main route selection
-        home: (token != null && !JwtDecoder.isExpired(token!))
-            ? HomePage(token: token!)
-            : const FrontPage(),
-        // You can add routes for the verification form
-        routes: {
-          '/verification': (context) =>
-              const VerificationForm(), // Add route for verification form
-        },
-      ),
+      child: BlocBuilder<LanguageCubit, Language>(
+          builder: (context, languageState) {
+        return MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: Locale(languageState.languageCode),
+          debugShowCheckedModeBanner: false,
+          // Main route selection
+          home: (token != null && !JwtDecoder.isExpired(token!))
+              ? HomePage(token: token!)
+              : const FrontPage(),
+          // You can add routes for the verification form
+          routes: {
+            '/verification': (context) =>
+                const VerificationForm(), // Add route for verification form
+          },
+        );
+      }),
     );
   }
 }

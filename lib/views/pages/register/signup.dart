@@ -1,6 +1,7 @@
 import 'package:donorconnect/Utils/show_snackbar.dart';
 import 'package:donorconnect/cubit/auth/auth_cubit.dart';
 import 'package:donorconnect/cubit/auth/auth_state.dart';
+import 'package:donorconnect/language/helper/language_extention.dart';
 import 'package:donorconnect/views/pages/main_home/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,11 +86,11 @@ class _SignuppageState extends State<Signuppage> {
         showDialog(
             context: context,
             builder: (context) {
-              return const AlertDialog(
+              return AlertDialog(
                 title: Center(
                     child: Text(
-                  "Passwords don't match",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  context.localizedString.password_dont_match,
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 )),
               );
             });
@@ -133,6 +134,7 @@ class _SignuppageState extends State<Signuppage> {
 
   @override
   Widget build(BuildContext context) {
+    final _text = context.localizedString;
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
 
@@ -213,12 +215,12 @@ class _SignuppageState extends State<Signuppage> {
                           child: const Icon(Icons.arrow_back),
                         ),
                       ),
-                      const Text(
-                        'Register',
+                      Text(
+                        _text.register,
                         style: style,
                       ),
-                      const Text(
-                        'Create your new account',
+                      Text(
+                        _text.create_account,
                         style: style1,
                       ),
                       SizedBox(height: screenHeight * 0.02),
@@ -228,10 +230,9 @@ class _SignuppageState extends State<Signuppage> {
                         controller: emailController,
                         obscureText: false,
                         icons: Icons.mail,
-                        name: 'Email',
-                        errormsg: _isEmailValid
-                            ? 'Email is Wrong or Blank, Kindly Enter correct Email'
-                            : null,
+                        name: _text.email,
+                        errormsg:
+                            _isEmailValid ? _text.email_field_error_text : null,
                       ),
                       SizedBox(height: screenHeight * 0.02),
 
@@ -240,8 +241,9 @@ class _SignuppageState extends State<Signuppage> {
                         controller: nameController,
                         obscureText: false,
                         icons: Icons.person,
-                        name: 'Full name',
-                        errormsg: _isNameValid ? 'Name can not be Empty' : null,
+                        name: _text.full_name,
+                        errormsg:
+                            _isNameValid ? _text.name_field_error_text : null,
                       ),
                       SizedBox(height: screenHeight * 0.02),
 
@@ -250,9 +252,9 @@ class _SignuppageState extends State<Signuppage> {
                         controller: numberController,
                         obscureText: false,
                         icons: Icons.call,
-                        name: 'Phone number',
+                        name: _text.phone_number,
                         errormsg: _isPhoneValid
-                            ? 'Phone number must be of 10 Digit'
+                            ? _text.phone_number_error_text
                             : null,
                       ),
                       SizedBox(height: screenHeight * 0.02),
@@ -262,10 +264,9 @@ class _SignuppageState extends State<Signuppage> {
                         controller: passwordController,
                         obscureText: true,
                         icons: Icons.lock,
-                        name: 'Create password',
-                        errormsg: _isPasswordValid
-                            ? 'Password must be 8 character long and must have aleast 1 uppercase,1 Lowercase,1 digit,1 special character'
-                            : null,
+                        name: _text.create_password,
+                        errormsg:
+                            _isPasswordValid ? _text.password_error_text : null,
                       ),
                       SizedBox(height: screenHeight * 0.02),
 
@@ -274,9 +275,9 @@ class _SignuppageState extends State<Signuppage> {
                         controller: confirmPasswordController,
                         obscureText: true,
                         icons: Icons.lock,
-                        name: 'Confirm password',
+                        name: _text.confirm_password,
                         errormsg: _isConfirmPasswordValid
-                            ? 'Password is not matching'
+                            ? _text.password_dont_match
                             : null,
                       ),
 
@@ -291,7 +292,7 @@ class _SignuppageState extends State<Signuppage> {
                               });
                             },
                           ),
-                          const Text("Available for Organ Donation"),
+                          Text(_text.availabel_for_organ_donation),
                         ],
                       ),
                       Row(
@@ -305,7 +306,7 @@ class _SignuppageState extends State<Signuppage> {
                               });
                             },
                           ),
-                          const Text("Available for Blood Donation"),
+                          Text(_text.avilabel_for_blood_donation),
                         ],
                       ),
 
@@ -321,10 +322,10 @@ class _SignuppageState extends State<Signuppage> {
                                 color: Color.fromARGB(255, 12, 48, 26),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30))),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                'Signup',
-                                style: TextStyle(
+                                _text.signup,
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 22,
                                     fontWeight: FontWeight.w500),
@@ -337,7 +338,7 @@ class _SignuppageState extends State<Signuppage> {
 
                       // FINAL TEXT
                       Text(
-                        'By signing you agree to terms and \n      use and the privacy notice',
+                        " ${_text.by_sign_your_account_you_agree_terms_and} \n      ${_text.use_and_the_privacy_notice}",
                         style: TextStyle(
                             fontSize: screenHeight * 0.018,
                             fontWeight: FontWeight.w400,
