@@ -1,7 +1,9 @@
 import 'package:donorconnect/Utils/show_snackbar.dart';
 import 'package:donorconnect/cubit/auth/auth_cubit.dart';
 import 'package:donorconnect/cubit/auth/auth_state.dart';
+
 import 'package:donorconnect/language/helper/language_extention.dart';
+
 import 'package:donorconnect/views/pages/main_home/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,10 +40,9 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> loginUser() async {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      context.read<AuthCubit>().loginUser(
-            emailController.text,
-            passwordController.text,
-          );
+      context
+          .read<AuthCubit>()
+          .loginUser(emailController.text, passwordController.text);
     } else {
       showSnackBar(
         context,
@@ -75,17 +76,20 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.pushReplacement(
               context,
               PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) => HomePage(
+                pageBuilder: (context, animation, secondaryAnimation) =>
+                    HomePage(
                   email: emailController.text,
                   name: state.user.name,
                 ),
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
                   return FadeTransition(
                     opacity: animation,
                     child: child,
                   );
                 },
-                transitionDuration: const Duration(milliseconds: 900), // Adjust duration as needed
+                transitionDuration: const Duration(
+                    milliseconds: 900), // Adjust duration as needed
               ),
             );
           }
