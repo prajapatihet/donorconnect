@@ -6,6 +6,7 @@ class Textbox extends StatelessWidget {
   final IconData icons;
   final String? errormsg;
   final bool obscureText;
+  final Widget? suffixIcon; //optional suffix icon for visibility toggle
 
   Textbox({
     super.key,
@@ -13,7 +14,9 @@ class Textbox extends StatelessWidget {
     required this.controller,
     required this.obscureText,
     required this.icons,
-    this.errormsg,
+    this.errormsg, 
+    this.suffixIcon, // Accepting the optional suffic icon
+
   });
 
   @override
@@ -42,12 +45,14 @@ class Textbox extends StatelessWidget {
             fontWeight: FontWeight.w400,
             fontSize: 14,
           ),
+          errorMaxLines: 3,  // Allows error text to wrap to 3 lines
           focusedErrorBorder: InputBorder.none,
           prefixIcon: Icon(
             icons,
             size: 20,
           ),
           prefixIconColor: const Color.fromARGB(255, 18, 79, 43),
+          suffixIcon: suffixIcon,
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
           fillColor: Colors.white60,
