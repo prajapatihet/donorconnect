@@ -103,7 +103,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(const AuthError("User with this credential already exists"));
       } else {
         print(e.code);
-        emit(AuthError(e.code));
+        emit(AuthError(e.toString()));
       }
     }
   }
