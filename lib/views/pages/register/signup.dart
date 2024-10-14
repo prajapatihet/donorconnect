@@ -153,23 +153,25 @@ class _SignuppageState extends State<Signuppage> {
             showSnackBar(context, state.message);
           }
           if (state is Authenticated) {
-             Navigator.pushReplacement(
+            Navigator.pushReplacement(
               context,
               PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) => HomePage(
+                pageBuilder: (context, animation, secondaryAnimation) =>
+                    HomePage(
                   name: nameController.text,
                   email: emailController.text.trim(),
                 ),
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
                   return FadeTransition(
                     opacity: animation,
                     child: child,
                   );
                 },
-                transitionDuration: const Duration(milliseconds: 900), // Adjust duration as needed
+                transitionDuration: const Duration(
+                    milliseconds: 900), // Adjust duration as needed
               ),
             );
-          
           }
         },
         builder: (context, state) {
