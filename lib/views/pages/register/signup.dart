@@ -30,6 +30,10 @@ class _SignuppageState extends State<Signuppage> {
   bool _isPasswordValid = false;
   bool _isConfirmPasswordValid = false;
 
+  //variable to control password visibility
+  bool _isPasswordVisible =false;
+  bool _isConfirmPasswordVisible = false;
+
   bool isValidEmail(String email) {
     final RegExp emailRegExp = RegExp(
       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
@@ -262,23 +266,44 @@ class _SignuppageState extends State<Signuppage> {
                       // PASSWORD TEXTBOX
                       Textbox(
                         controller: passwordController,
-                        obscureText: true,
+                        obscureText: ! _isPasswordVisible,
                         icons: Icons.lock,
                         name: _text.create_password,
                         errormsg:
                             _isPasswordValid ? _text.password_error_text : null,
+                         suffixIcon: IconButton(
+                          icon: Icon(
+                            _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isPasswordVisible = !_isPasswordVisible;
+                            });
+                          },
+                        ),
+                        
                       ),
                       SizedBox(height: screenHeight * 0.02),
 
                       // CONFIRM PASSWORD
                       Textbox(
                         controller: confirmPasswordController,
-                        obscureText: true,
+                        obscureText: ! _isConfirmPasswordVisible,
                         icons: Icons.lock,
                         name: _text.confirm_password,
                         errormsg: _isConfirmPasswordValid
                             ? _text.password_dont_match
                             : null,
+                         suffixIcon: IconButton(
+                          icon: Icon(
+                            _isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
+                            });
+                          },
+                        ),
                       ),
 
                       Row(
