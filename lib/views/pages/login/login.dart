@@ -5,11 +5,14 @@ import 'package:donorconnect/cubit/auth/auth_state.dart';
 import 'package:donorconnect/language/helper/language_extention.dart';
 
 import 'package:donorconnect/views/pages/main_home/homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Utils/Textbox.dart';
+import '../../../cubit/forgot_password/forgot_password_cubit.dart';
+import '../forgot_password/forgot-password.dart';
 import '../register/signup.dart';
 
 class LoginPage extends StatefulWidget {
@@ -24,6 +27,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+//variable to control password visibility
+  bool _isPasswordVisible =false;
   // VALIDATION
   bool _isValidate = false;
   late SharedPreferences prefs;
@@ -148,11 +153,21 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           Textbox(
                             controller: passwordController,
-                            obscureText: true,
+                            obscureText: !_isPasswordVisible,
                             icons: Icons.lock,
                             name: _text.password,
                             errormsg:
                                 _isValidate ? _text.password_error_text : null,
+                             suffixIcon: IconButton(
+                          icon: Icon(
+                            _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isPasswordVisible = !_isPasswordVisible;
+                            });
+                          },
+                        ),
                           ),
                         ],
                       ),
@@ -161,7 +176,18 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: EdgeInsets.only(left: screenWidth * 0.45),
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                                Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => BlocProvider(
+      create: (context) => ForgotPasswordCubit(FirebaseAuth.instance),
+      child: ForgotPasswordScreen(),
+    ),
+  ),
+);
+
+                          },
                           child: Text(
                             _text.forget_password,
                             style: TextStyle(
