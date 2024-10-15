@@ -1,4 +1,3 @@
-import 'package:donorconnect/secrets.dart';
 import 'package:donorconnect/views/pages/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,8 +6,6 @@ import 'package:donorconnect/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../views/pages/register/signup.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final FirebaseAuth _auth;
