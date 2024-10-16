@@ -1,3 +1,4 @@
+import 'package:donorconnect/views/pages/camps/calendarPage.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
@@ -54,13 +55,13 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
   Future<void> _fetchDonationCamps() async {
     try {
       var db = await mongo.Db.create(
-          'Mongo db uri');
+          'mongo url');
       await db.open();
       var collection = db.collection('BloodDonationCamps');
       List<Map<String, dynamic>> camps = await collection.find().toList();
 
       double distanceThreshold = 25 * 1000;
-      setState(() {
+      // setState(() {
         _upcomingCamps = camps.where((camp) {
           double campLatitude = camp['latitude'];
           double campLongitude = camp['longitude'];
@@ -84,8 +85,10 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
               distanceInMeters <= distanceThreshold;
         }).toList();
         _isLoading = false;
+      // });
+      setState(() {
+        
       });
-
       await _fetchRegisteredCamps(db);
       await db.close();
     } catch (e) {
@@ -167,13 +170,7 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
       final Uri googleMapsUrl = Uri.parse(
           'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude');
 
-      if (await canLaunchUrl(googleMapsUrl)) {
-        await launchUrl(googleMapsUrl);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Not able to launch")),
-        );
-      }
+      launchUrl(googleMapsUrl);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Invalid coordinates.")),
@@ -184,7 +181,7 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
   Future<void> _registerForCamp(Map<String, dynamic> camp) async {
     try {
       var db = await mongo.Db.create(
-          'Mongo db uri');
+          'mongo url');
       await db.open();
       var registrationCollection = db.collection('CampRegistrations');
 
@@ -248,6 +245,15 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
             Tab(text: "Registered"),
           ],
         ),
+        actions:[
+          IconButton(
+            icon: Icon(Icons.calendar_month),
+            onPressed: () {
+              print("hello");
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CalendarPage()));
+            },
+          ),
+        ],
         automaticallyImplyLeading: false,
       ),
       body: _currentPosition == null
@@ -320,8 +326,8 @@ class _AddCampFormState extends State<AddCampForm> {
   String _location = '';
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
-  double? _latitude;
-  double? _longitude;
+  double? _latitude=0;
+  double? _longitude=0;
 
   @override
   void initState() {
@@ -502,10 +508,9 @@ class _AddCampFormState extends State<AddCampForm> {
 
       try {
         var db = await mongo.Db.create(
-            'Mongo db uri');
+            'mongo url');
         await db.open();
         var collection = db.collection('BloodDonationCamps');
-
         await collection.insert({
           'campName': _name,
           'organizer': _organizer,
