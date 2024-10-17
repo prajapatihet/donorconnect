@@ -78,7 +78,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   TextFormField(
                     initialValue: state.medicalHistory,
                     decoration:
-                        InputDecoration(labelText: _text.medical_history),
+                        InputDecoration(
+                          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
+                          labelText: _text.medical_history,
+                          ),
                     onChanged: (value) => context
                         .read<ProfileCubit>()
                         .updateMedicalHistory(value),
@@ -89,17 +92,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   TextFormField(
                     initialValue: state.currentMedications,
                     decoration:
-                        InputDecoration(labelText: _text.current_medications),
+                        InputDecoration(
+                          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
+                          labelText: _text.current_medications,
+                          ),
                     onChanged: (value) => context
                         .read<ProfileCubit>()
                         .updateCurrentMedications(value),
                   ),
+                
                   const SizedBox(height: 16),
 
                   // Allergies
                   TextFormField(
                     initialValue: state.allergies,
-                    decoration: InputDecoration(labelText: _text.allergies),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
+                      labelText: _text.allergies,
+                      ),
                     onChanged: (value) =>
                         context.read<ProfileCubit>().updateAllergies(value),
                   ),
@@ -121,7 +131,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onChanged: (value) {
                       context.read<ProfileCubit>().updateBloodType(value ?? '');
                     },
-                    decoration: InputDecoration(labelText: _text.blood_type),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
+                      labelText: _text.blood_type,
+                      ),
                   ),
                   const SizedBox(height: 16),
 
@@ -160,6 +173,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   // Save Button
                   ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  padding: const EdgeInsets.fromLTRB(112, 10, 140, 15),
+                ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         // Save the profile using userId
@@ -171,7 +191,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         );
                       }
                     },
-                    child: Text(_text.save_profile),
+                    child: Text(
+                      _text.save_profile,
+                      style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  fontWeight: FontWeight.bold,
+                  ),
+                    ),
+
                   ),
                 ],
               ),
