@@ -1,0 +1,41 @@
+name: Build APK on Merge to Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.5'
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+        continue-on-error: true
+
+      - name: Build APK
+        run: flutter build apk --release
+        continue-on-error: true 
+
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+        continue-on-error: true 
