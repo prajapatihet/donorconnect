@@ -294,6 +294,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.3"
+  dropdown_textfield:
+    dependency: "direct main"
+    description:
+      name: dropdown_textfield
+      sha256: ef8a35c52c92a563773d3efead94e5a1c162d6fe6c53974d0986aab6249928a1
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   equatable:
     dependency: "direct main"
     description:
