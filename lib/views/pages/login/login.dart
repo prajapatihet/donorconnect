@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordController = TextEditingController();
 
 //variable to control password visibility
-  bool _isPasswordVisible =false;
+  bool _isPasswordVisible = false;
   // VALIDATION
   bool _isValidate = false;
   late SharedPreferences prefs;
@@ -158,16 +158,18 @@ class _LoginPageState extends State<LoginPage> {
                             name: _text.password,
                             errormsg:
                                 _isValidate ? _text.password_error_text : null,
-                             suffixIcon: IconButton(
-                          icon: Icon(
-                            _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _isPasswordVisible = !_isPasswordVisible;
-                            });
-                          },
-                        ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _isPasswordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _isPasswordVisible = !_isPasswordVisible;
+                                });
+                              },
+                            ),
                           ),
                         ],
                       ),
@@ -177,16 +179,16 @@ class _LoginPageState extends State<LoginPage> {
                         padding: EdgeInsets.only(left: screenWidth * 0.45),
                         child: TextButton(
                           onPressed: () {
-                                Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (context) => BlocProvider(
-      create: (context) => ForgotPasswordCubit(FirebaseAuth.instance),
-      child: ForgotPasswordScreen(),
-    ),
-  ),
-);
-
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => ForgotPasswordCubit(
+                                      FirebaseAuth.instance),
+                                  child: ForgotPasswordScreen(),
+                                ),
+                              ),
+                            );
                           },
                           child: Text(
                             _text.forget_password,
@@ -200,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
 
                       // LOGIN BUTTON
                       SizedBox(
-                        height: screenHeight * 0.18,
+                        height: screenHeight * 0.12,
                       ),
                       GestureDetector(
                         onTap: loginUser,
@@ -225,7 +227,22 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-
+                      
+                      //Google Login
+                      SizedBox(
+                        height: screenHeight * 0.02,
+                      ),
+                      Container(
+                        height: 50,
+                        alignment: Alignment.center,
+                        child: IconButton(
+                          icon: Image.asset('assets/images/google.png'),
+                          iconSize: 50,
+                          onPressed: () {
+                            context.read<AuthCubit>().signInWithGoogle();
+                          },
+                        ),
+                      ),
                       // FINAL TEXT
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
