@@ -349,7 +349,9 @@ class _AddCampFormState extends State<AddCampForm> {
             child: Column(
               children: [
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Camp Name'),
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
+                    labelText: 'Camp Name'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter camp name';
@@ -360,8 +362,12 @@ class _AddCampFormState extends State<AddCampForm> {
                     _name = value!;
                   },
                 ),
+                SizedBox(height: 10),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Organizer Name'),
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
+                    labelText: 'Organizer Name',
+                    ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter organizer name';
@@ -372,8 +378,11 @@ class _AddCampFormState extends State<AddCampForm> {
                     _organizer = value!;
                   },
                 ),
+                 SizedBox(height: 10),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Description'),
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
+                    labelText: 'Description'),
                   maxLines: 3,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -385,8 +394,11 @@ class _AddCampFormState extends State<AddCampForm> {
                     _description = value!;
                   },
                 ),
+                 SizedBox(height: 10),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Address'),
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
+                    labelText: 'Address'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter address';
@@ -426,8 +438,18 @@ class _AddCampFormState extends State<AddCampForm> {
                 ],
                 SizedBox(height: 10),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  padding: const EdgeInsets.fromLTRB(112, 10, 140, 15),
+                ),
                   onPressed: _submitForm,
-                  child: Text("Add Camp"),
+                  child: Text("Add Camp", style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  fontWeight: FontWeight.bold,
+                  ),),
                 ),
               ],
             ),
