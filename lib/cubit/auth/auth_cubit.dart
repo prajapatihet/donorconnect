@@ -1,10 +1,12 @@
 import 'package:donorconnect/views/pages/welcome/welcome_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:donorconnect/cubit/auth/auth_state.dart';
 import 'package:donorconnect/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -55,6 +57,60 @@ class AuthCubit extends Cubit<AuthState> {
       } else {
         emit(AuthError(e.toString()));
       }
+    }
+  }
+
+  Future<void> signInWithGoogle() async {
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    try {
+      AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      await FirebaseAuth.instance
+          .signInWithCredential(credential)
+          .whenComplete(() {});
+      UserModel userModel = UserModel(
+        uid: FirebaseAuth.instance.currentUser!.uid,
+        name: FirebaseAuth.instance.currentUser!.displayName!,
+        email: FirebaseAuth.instance.currentUser!.email!,
+        phone: FirebaseAuth.instance.currentUser!.phoneNumber ?? '',
+        isOrganDonor: false,
+        isBloodDonor: false,
+      );
+      _firestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .snapshots()
+          .listen(
+        (DocumentSnapshot snapshot) {
+          if (snapshot.exists) {
+            UserModel user =
+                UserModel.fromMap(snapshot.data() as Map<String, dynamic>);
+            emit(Authenticated(user));
+            print(user.name);
+            print(user.email);
+            // Save user name to SharedPreferences
+            _saveUserToPrefs(FirebaseAuth.instance.currentUser!.uid, user);
+          } else {
+            _firestore
+                .collection('users')
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .set(userModel.toMap());
+            // Save user data to SharedPreferences
+            _saveUserToPrefs(FirebaseAuth.instance.currentUser!.uid, userModel);
+            emit(Authenticated(userModel));
+          }
+        },
+        onError: (error) {
+          emit(AuthError(error.toString()));
+        },
+      );
+      emit(Authenticated(userModel));
+    } catch (e) {
+      print(e);
     }
   }
 
