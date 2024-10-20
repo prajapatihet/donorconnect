@@ -1,5 +1,4 @@
-# 🌟 Welcome to DonorConnect - Connect Donors to Save Lives 🌟
-Thank you for your interest in contributing to **DonorConnect!**
+# 🌟Thank you for your interest in contributing to **DonorConnect!**🌟
 
 Before you start contributing, please take a moment to review our guidelines below. If you have any questions, feel free to open an issue, and we'll be happy to assist you. 🚀
 
@@ -98,8 +97,9 @@ Reference issues in your PRs to link relevant work.
 DonorConnect is built using modern technologies to ensure reliability and scalability:
 
 **Frontend:** React ⚛️, JavaScript 🌐, HTML, CSS 🎨
-**Backend:** Node.js 🟩, Express.js 🚀
-**Database:** MongoDB 🍃
+**Flutter & Dart:** For cross-platform mobile development.
+**Firebase:** For authentication and backend services.
+**Dart Cubit:** For state management.
 **Version Control:** Git & GitHub 🛠️
 
 ---
