@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:donorconnect/cubit/auth/auth_cubit.dart';
 import 'package:donorconnect/cubit/locate_blood_banks/locate_blood_banks_cubit.dart';
 import 'package:donorconnect/cubit/profile/profile_cubit.dart';
+import 'package:donorconnect/cubit/theme_toggle/theme_cubit.dart';
+import 'package:donorconnect/cubit/theme_toggle/value_cubit.dart';
 import 'package:donorconnect/firebase_options.dart';
 import 'package:donorconnect/language/cubit/language_cubit.dart';
 import 'package:donorconnect/language/helper/language.dart';
@@ -59,25 +61,38 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LanguageCubit()..initilize(),
         ),
+        BlocProvider(
+          create: (context) => ThemeCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ValueCubit(),
+        ),
       ],
-      child: BlocBuilder<LanguageCubit, Language>(
-          builder: (context, languageState) {
-        return MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          locale: Locale(languageState.languageCode),
-          debugShowCheckedModeBanner: false,
-          // Main route selection
-          home: (token != null && !JwtDecoder.isExpired(token!))
-              ? HomePage(token: token!)
-              : const FrontPage(),
-          // You can add routes for the verification form
-          routes: {
-            '/verification': (context) =>
-                const VerificationForm(), // Add route for verification form
-          },
-        );
-      }),
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, themeState) {
+          return BlocBuilder<LanguageCubit, Language>(
+              builder: (context, languageState) {
+            return MaterialApp(
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: Locale(languageState.languageCode),
+              //theme
+              themeMode: themeState,
+              darkTheme: ThemeData.dark(),
+              debugShowCheckedModeBanner: false,
+              // Main route selection
+              home: (token != null && !JwtDecoder.isExpired(token!))
+                  ? HomePage(token: token!)
+                  : const FrontPage(),
+              // You can add routes for the verification form
+              routes: {
+                '/verification': (context) =>
+                    const VerificationForm(), // Add route for verification form
+              },
+            );
+          });
+        },
+      ),
     );
   }
 }
