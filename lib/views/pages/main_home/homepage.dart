@@ -1,5 +1,6 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:donorconnect/views/pages/camps/campsPage.dart';
+import 'package:donorconnect/views/pages/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import '../profile/profile_screen.dart';
 import 'home_pages/home_screen.dart';
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
     final _text = context.localizedString;
     final pages = [
       const HomeScreen(),
-      const HomeScreen(),
+      const SearchScreen(),
       const Camps(),
       ProfileScreen(
         name: widget.name ?? "No Name",
