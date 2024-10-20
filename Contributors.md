@@ -5,17 +5,9 @@ Before you start contributing, please take a moment to review our guidelines bel
 ---
 # 📊 Project Overview
 DonorConnect is a platform designed to simplify the process of connecting donors with those in need of critical donations, including blood, organs, and resources. Your contributions will help make a difference in people's lives by improving features, fixing issues, and adding new functionalities.
-
-- **⭐ Stars**: [stars count]
-- **🍴 Forks**: [forks count]
-- **🐛 Issues**: [issues count]
-- **🔔 Open Pull Requests**: [open PRs count]
-- **🔕 Closed Pull Requests**: [closed PRs count]
-- **🛠️ Languages Used**: [language count]
-- **🌐 Contributors**: [contributors count]
  
 --- 
-# 🛠️ Getting Started
+# 🛠️ How to contribute:
 - Follow these steps to contribute to DonorConnect:
 1. **Fork this Repository** 🍴:  
    Click the fork button at the top of the repository page to create a copy in your GitHub account.
