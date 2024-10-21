@@ -40,6 +40,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
+                style:ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      padding: const EdgeInsets.fromLTRB(12, 18, 14, 18),
+                    ),
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
                     context,
@@ -49,7 +56,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     (Route<dynamic> route) => false,
                   );
                 },
-                child: const Text('Back to Login In Page'),
+                child:  Text(
+                  'Back to Login In Page',
+                   style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16
+                      ),
+                ),
               ),
             ),
           ],
