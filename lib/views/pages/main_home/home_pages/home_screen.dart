@@ -4,6 +4,7 @@ import 'package:donorconnect/language/helper/langauge_popup.dart';
 import 'package:donorconnect/language/helper/language_extention.dart';
 import 'package:donorconnect/views/common_widgets/home_card.dart';
 import 'package:donorconnect/views/common_widgets/home_card_form.dart';
+import 'package:donorconnect/views/pages/learn_about_donation/learn_about_donation.dart';
 import 'package:donorconnect/views/pages/locate_blood_banks/locate_blood_banks.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
           //     icon: const Icon(Icons.language_rounded))
 
           Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+            padding: EdgeInsets.only(left: 16.0, right: 16.0),
             child: LanguagePopup(),
           )
         ],
@@ -87,18 +88,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) => const LocateBloodBanks(),
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const LocateBloodBanks(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                      transitionDuration: const Duration(
+                          milliseconds: 900), // Adjust duration as needed
+                    ),
                   );
-                },
-                transitionDuration: const Duration(milliseconds: 900), // Adjust duration as needed
-              ),);
-                    
                 },
               ),
               HomeCard(
@@ -107,7 +111,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 button: "Learn",
                 image: 'assets/images/home_image2.png',
                 icon: const Icon(Icons.menu_book_outlined),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const LearnAboutDonation(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                      transitionDuration: const Duration(
+                          milliseconds: 900), // Adjust duration as needed
+                    ),
+                  );
+                },
               ),
               SizedBox(height: height * 0.1)
             ],
