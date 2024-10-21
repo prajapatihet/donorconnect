@@ -56,6 +56,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     
         controller: emailController,
         decoration: const InputDecoration(
+          label:Text('Email'),
           hintText: 'Email',
           hintStyle: TextStyle(
             color: Colors.black,
@@ -80,6 +81,13 @@ class ForgotPasswordScreen extends StatelessWidget {
            
                   const SizedBox(height: 40),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      padding: const EdgeInsets.fromLTRB(90, 16, 90, 20),
+                    ),
                     onPressed: () {
                       final email = emailController.text.trim();
                       if (email.isNotEmpty) {
@@ -108,9 +116,14 @@ class ForgotPasswordScreen extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30)),
                               ),
-                              child: const Center(
+                              child:  Center(
                                 child: Text(
                                   'Send Reset Email',
+                                  style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16
+                      ),
                                 
                                 ),
                               ),

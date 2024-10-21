@@ -1,7 +1,9 @@
 import 'package:donorconnect/cubit/auth/auth_cubit.dart';
 import 'package:donorconnect/cubit/profile/profile_cubit.dart';
 import 'package:donorconnect/cubit/profile/profile_state.dart';
+import 'package:donorconnect/cubit/theme_toggle/value_cubit.dart';
 import 'package:donorconnect/language/helper/language_extention.dart';
+import 'package:donorconnect/views/common_widgets/toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -77,11 +79,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // Medical History
                   TextFormField(
                     initialValue: state.medicalHistory,
-                    decoration:
-                        InputDecoration(
-                          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
-                          labelText: _text.medical_history,
-                          ),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(9))),
+                      labelText: _text.medical_history,
+                    ),
                     onChanged: (value) => context
                         .read<ProfileCubit>()
                         .updateMedicalHistory(value),
@@ -91,25 +93,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // Current Medications
                   TextFormField(
                     initialValue: state.currentMedications,
-                    decoration:
-                        InputDecoration(
-                          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
-                          labelText: _text.current_medications,
-                          ),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(9))),
+                      labelText: _text.current_medications,
+                    ),
                     onChanged: (value) => context
                         .read<ProfileCubit>()
                         .updateCurrentMedications(value),
                   ),
-                
+
                   const SizedBox(height: 16),
 
                   // Allergies
                   TextFormField(
                     initialValue: state.allergies,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(9))),
                       labelText: _text.allergies,
-                      ),
+                    ),
                     onChanged: (value) =>
                         context.read<ProfileCubit>().updateAllergies(value),
                   ),
@@ -132,9 +135,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       context.read<ProfileCubit>().updateBloodType(value ?? '');
                     },
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(9))),
                       labelText: _text.blood_type,
-                      ),
+                    ),
                   ),
                   const SizedBox(height: 16),
 
@@ -169,17 +173,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       context.read<ProfileCubit>().toggleNotifications(value);
                     },
                   ),
+                  const SizedBox(height: 16),
+                  // theme-toggle button
+                  BlocBuilder<ValueCubit, bool>(
+                    builder: (context, currentValuestate) {
+                      final switchValue = currentValuestate;
+                      // print("Current Value of switch:::$switchValue");
+                      return ThemeToggleButton(
+                        switchValue: switchValue,
+                      );
+                    },
+                  ),
                   const SizedBox(height: 24),
-
                   // Save Button
                   ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  padding: const EdgeInsets.fromLTRB(112, 10, 140, 15),
-                ),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      padding: const EdgeInsets.fromLTRB(112, 10, 140, 15),
+                    ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         // Save the profile using userId
@@ -194,11 +208,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Text(
                       _text.save_profile,
                       style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  fontWeight: FontWeight.bold,
-                  ),
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-
                   ),
                 ],
               ),

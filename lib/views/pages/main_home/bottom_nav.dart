@@ -14,10 +14,7 @@ class NavigationController extends GetxController {
       const HomeScreen(),
       const HomeScreen(),
       const HomeScreen(),
-      ProfileScreen(
-        name: name,
-        userId: email,
-      ),
+      ProfileScreen(name: name,userId: email,),
     ];
   }
 }
