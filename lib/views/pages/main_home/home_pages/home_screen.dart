@@ -5,6 +5,7 @@ import 'package:donorconnect/language/helper/language_extention.dart';
 import 'package:donorconnect/views/common_widgets/home_card.dart';
 import 'package:donorconnect/views/common_widgets/home_card_form.dart';
 import 'package:donorconnect/views/pages/locate_blood_banks/locate_blood_banks.dart';
+import 'package:donorconnect/views/pages/main_home/chatbot.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -114,6 +115,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ChatBot()));
+      },
+      child: const Icon(Icons.chat),
+    ),
     );
   }
 }
