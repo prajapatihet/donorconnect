@@ -4,6 +4,7 @@ import 'package:donorconnect/language/helper/langauge_popup.dart';
 import 'package:donorconnect/language/helper/language_extention.dart';
 import 'package:donorconnect/views/common_widgets/home_card.dart';
 import 'package:donorconnect/views/common_widgets/home_card_form.dart';
+import 'package:donorconnect/views/pages/Required/required_screen.dart';
 import 'package:donorconnect/views/pages/locate_blood_banks/locate_blood_banks.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,7 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   HomeCardConst(
                     title: _text.required,
                     col: const Color.fromARGB(255, 167, 165, 252),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (ctx)=> RequiredScreen()));
+                    },
                   ),
                 ],
               ),
