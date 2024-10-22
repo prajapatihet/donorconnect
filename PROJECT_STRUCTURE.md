@@ -347,6 +347,7 @@
 ├── pubspec.yaml
 ├── readme/
 │   └── gssoc_ext_2024.png
+├── repo_structure.txt
 ├── test/
 │   └── widget_test.dart
 ├── web/
