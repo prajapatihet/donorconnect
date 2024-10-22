@@ -23,6 +23,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // import 'package:riverpod/riverpod.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +33,7 @@ void main() async {
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return const Material();
   };
+  // await dotenv.load(fileName: '.env');
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
