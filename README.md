@@ -4,6 +4,10 @@
 
 **DonorConnect**, an application designed to connect donors and organizations for life-saving contributions. This guide will help you contribute to the project.
 
+## Project Structure
+
+Check the project structure here [Project Structure](PROJECT_STRUCTURE.md)
+
 ## Table of Contents
 - [📂 Project Overview](#-project-overview)
 - [🏆 Featured in](#-featured-in)
