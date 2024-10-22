@@ -1,7 +1,3 @@
-## Project Structure
-
-<!-- START_STRUCTURE -->
-```
 ├── CODE_OF_CONDUCT.md
 ├── Contributors.md
 ├── LICENSE.md
@@ -397,5 +393,3 @@
         ├── utils.h
         ├── win32_window.cpp
         └── win32_window.h
-```
-<!-- END_STRUCTURE -->
