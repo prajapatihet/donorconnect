@@ -239,14 +239,21 @@
 │   │   └── verification_service.dart
 │   └── views/
 │       ├── common_widgets/
+│       │   ├── donor_card.dart
 │       │   ├── events_card.dart
 │       │   ├── home_card.dart
 │       │   ├── home_card_form.dart
+│       │   ├── rounded_conatiner.dart
+│       │   ├── rounded_image.dart
 │       │   └── toggle_button.dart
 │       ├── controllers/
 │       │   └── onboarding/
 │       │       └── onboarding_controller.dart
 │       ├── pages/
+│       │   ├── Required/
+│       │   │   ├── required_screen.dart
+│       │   │   └── widgets/
+│       │   │       └── choice_chip.dart
 │       │   ├── camps/
 │       │   │   ├── calendarPage.dart
 │       │   │   └── campsPage.dart
