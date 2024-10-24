@@ -243,6 +243,7 @@
 │   │   └── verification_service.dart
 │   └── views/
 │       ├── common_widgets/
+│       │   ├── donate_card.dart
 │       │   ├── donor_card.dart
 │       │   ├── events_card.dart
 │       │   ├── home_card.dart
@@ -261,6 +262,10 @@
 │       │   ├── camps/
 │       │   │   ├── calendarPage.dart
 │       │   │   └── campsPage.dart
+│       │   ├── donate/
+│       │   │   ├── donate_screen.dart
+│       │   │   └── widgets/
+│       │   │       └── donate_screen_tabbar.dart
 │       │   ├── forgot_password/
 │       │   │   ├── change-password.dart
 │       │   │   └── forgot-password.dart

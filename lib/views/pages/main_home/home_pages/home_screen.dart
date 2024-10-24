@@ -5,6 +5,7 @@ import 'package:donorconnect/language/helper/language_extention.dart';
 import 'package:donorconnect/views/common_widgets/home_card.dart';
 import 'package:donorconnect/views/common_widgets/home_card_form.dart';
 import 'package:donorconnect/views/pages/Required/required_screen.dart';
+import 'package:donorconnect/views/pages/donate/donate_Screen.dart';
 import 'package:donorconnect/views/pages/learn_about_donation/learn_about_donation.dart';
 import 'package:donorconnect/views/pages/locate_blood_banks/locate_blood_banks.dart';
 import 'package:donorconnect/views/pages/main_home/chatbot.dart';
@@ -70,7 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   HomeCardConst(
                     title: _text.donate,
                     col: const Color.fromARGB(255, 255, 122, 122),
-                    onPressed: () {},
+                    onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (ctx)=> DonateScreen()));
+                    },
                   ),
                   HomeCardConst(
                     title: _text.required,
