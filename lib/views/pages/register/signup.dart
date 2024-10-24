@@ -155,6 +155,13 @@ class _SignuppageState extends State<Signuppage> {
         listener: (context, state) {
           if (state is AuthError) {
             showSnackBar(context, state.message);
+            setState(() {
+              _isEmailValid = false;
+              _isNameValid = false;
+              _isPhoneValid = false;
+              _isPasswordValid = false;
+              _isConfirmPasswordValid = false;
+            });
           }
           if (state is Authenticated) {
             Navigator.pushReplacement(

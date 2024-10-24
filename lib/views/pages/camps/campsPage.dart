@@ -47,9 +47,9 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
 
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-    setState(() {
-      _currentPosition = position;
-    });
+    // setState(() {
+    //   _currentPosition = position;
+    // });
   }
 
   Future<void> _fetchDonationCamps() async {
