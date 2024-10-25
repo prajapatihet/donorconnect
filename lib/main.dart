@@ -33,10 +33,10 @@ void main() async {
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return const Material();
   };
-  // await dotenv.load(fileName: '.env');
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
+  await dotenv.load(fileName: '.env');
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
   ]);
   runApp(MyApp(
     token: prefs.getString('token'),
@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
               darkTheme: ThemeData.dark(),
               debugShowCheckedModeBanner: false,
               // Main route selection
-              home:  (token != null && !JwtDecoder.isExpired(token!))
+              home: (token != null && !JwtDecoder.isExpired(token!))
                   ? HomePage(token: token!)
                   : const OnBoardingScreen(),
               // You can add routes for the verification form
@@ -98,7 +98,6 @@ class MyApp extends StatelessWidget {
                 '/verification': (context) =>
                     const VerificationForm(), // Add route for verification form
               },
-
             );
           });
         },

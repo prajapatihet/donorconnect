@@ -1,5 +1,6 @@
 import 'package:donorconnect/views/pages/camps/calendarPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:url_launcher/url_launcher.dart';
@@ -19,6 +20,7 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
   List<Map<String, dynamic>> _registeredCamps = [];
   bool _isLoading = true;
   late TabController _tabController;
+  final mongodb_url = dotenv.env['MONGODB_URL'];
 
   @override
   void initState() {
@@ -45,8 +47,8 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
       return;
     }
 
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+    // Position position = await Geolocator.getCurrentPosition(
+    //     desiredAccuracy: LocationAccuracy.high);
     // setState(() {
     //   _currentPosition = position;
     // });
@@ -54,41 +56,38 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
 
   Future<void> _fetchDonationCamps() async {
     try {
-      var db = await mongo.Db.create(
-          'mongo url');
+      var db = await mongo.Db.create(mongodb_url!);
       await db.open();
       var collection = db.collection('BloodDonationCamps');
       List<Map<String, dynamic>> camps = await collection.find().toList();
 
       double distanceThreshold = 25 * 1000;
       // setState(() {
-        _upcomingCamps = camps.where((camp) {
-          double campLatitude = camp['latitude'];
-          double campLongitude = camp['longitude'];
-          double distanceInMeters = Geolocator.distanceBetween(
-              _currentPosition!.latitude,
-              _currentPosition!.longitude,
-              campLatitude,
-              campLongitude);
-          return DateTime.parse(camp['date']).isAfter(DateTime.now()) &&
-              distanceInMeters <= distanceThreshold;
-        }).toList();
-        _pastCamps = camps.where((camp) {
-          double campLatitude = camp['latitude'];
-          double campLongitude = camp['longitude'];
-          double distanceInMeters = Geolocator.distanceBetween(
-              _currentPosition!.latitude,
-              _currentPosition!.longitude,
-              campLatitude,
-              campLongitude);
-          return DateTime.parse(camp['date']).isBefore(DateTime.now()) &&
-              distanceInMeters <= distanceThreshold;
-        }).toList();
-        _isLoading = false;
+      _upcomingCamps = camps.where((camp) {
+        double campLatitude = camp['latitude'];
+        double campLongitude = camp['longitude'];
+        double distanceInMeters = Geolocator.distanceBetween(
+            _currentPosition!.latitude,
+            _currentPosition!.longitude,
+            campLatitude,
+            campLongitude);
+        return DateTime.parse(camp['date']).isAfter(DateTime.now()) &&
+            distanceInMeters <= distanceThreshold;
+      }).toList();
+      _pastCamps = camps.where((camp) {
+        double campLatitude = camp['latitude'];
+        double campLongitude = camp['longitude'];
+        double distanceInMeters = Geolocator.distanceBetween(
+            _currentPosition!.latitude,
+            _currentPosition!.longitude,
+            campLatitude,
+            campLongitude);
+        return DateTime.parse(camp['date']).isBefore(DateTime.now()) &&
+            distanceInMeters <= distanceThreshold;
+      }).toList();
+      _isLoading = false;
       // });
-      setState(() {
-        
-      });
+      setState(() {});
       await _fetchRegisteredCamps(db);
       await db.close();
     } catch (e) {
@@ -180,8 +179,7 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
 
   Future<void> _registerForCamp(Map<String, dynamic> camp) async {
     try {
-      var db = await mongo.Db.create(
-          'mongo url');
+      var db = await mongo.Db.create(mongodb_url!);
       await db.open();
       var registrationCollection = db.collection('CampRegistrations');
 
@@ -245,12 +243,13 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
             Tab(text: "Registered"),
           ],
         ),
-        actions:[
+        actions: [
           IconButton(
             icon: Icon(Icons.calendar_month),
             onPressed: () {
               print("hello");
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CalendarPage()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => CalendarPage()));
             },
           ),
         ],
@@ -326,8 +325,9 @@ class _AddCampFormState extends State<AddCampForm> {
   String _location = '';
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
-  double? _latitude=0;
-  double? _longitude=0;
+  double? _latitude = 0;
+  double? _longitude = 0;
+  final mongodb_url = dotenv.env['MONGODB_URL'];
 
   @override
   void initState() {
@@ -350,8 +350,9 @@ class _AddCampFormState extends State<AddCampForm> {
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
-                    labelText: 'Camp Name'),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(9))),
+                      labelText: 'Camp Name'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter camp name';
@@ -365,9 +366,10 @@ class _AddCampFormState extends State<AddCampForm> {
                 SizedBox(height: 10),
                 TextFormField(
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(9))),
                     labelText: 'Organizer Name',
-                    ),
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter organizer name';
@@ -378,11 +380,12 @@ class _AddCampFormState extends State<AddCampForm> {
                     _organizer = value!;
                   },
                 ),
-                 SizedBox(height: 10),
+                SizedBox(height: 10),
                 TextFormField(
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
-                    labelText: 'Description'),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(9))),
+                      labelText: 'Description'),
                   maxLines: 3,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -394,11 +397,12 @@ class _AddCampFormState extends State<AddCampForm> {
                     _description = value!;
                   },
                 ),
-                 SizedBox(height: 10),
+                SizedBox(height: 10),
                 TextFormField(
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(9))),
-                    labelText: 'Address'),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(9))),
+                      labelText: 'Address'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter address';
@@ -439,17 +443,20 @@ class _AddCampFormState extends State<AddCampForm> {
                 SizedBox(height: 10),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    padding: const EdgeInsets.fromLTRB(112, 10, 140, 15),
                   ),
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  padding: const EdgeInsets.fromLTRB(112, 10, 140, 15),
-                ),
                   onPressed: _submitForm,
-                  child: Text("Add Camp", style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  fontWeight: FontWeight.bold,
-                  ),),
+                  child: Text(
+                    "Add Camp",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -529,8 +536,7 @@ class _AddCampFormState extends State<AddCampForm> {
       _formKey.currentState!.save();
 
       try {
-        var db = await mongo.Db.create(
-            'mongo url');
+        var db = await mongo.Db.create(mongodb_url!);
         await db.open();
         var collection = db.collection('BloodDonationCamps');
         await collection.insert({

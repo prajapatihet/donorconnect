@@ -76,7 +76,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     title: _text.required,
                     col: const Color.fromARGB(255, 167, 165, 252),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (ctx)=> RequiredScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (ctx) => RequiredScreen()));
                     },
                   ),
                 ],
@@ -139,11 +142,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ChatBot()));
-      },
-      child: const Icon(Icons.chat),
-    ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ChatBot()));
+        },
+        child: const Icon(Icons.chat),
+      ),
     );
   }
 }

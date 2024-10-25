@@ -1,9 +1,5 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 // Access your API key as an environment variable (see "Set up your API key" above)
@@ -16,8 +12,8 @@ class ChatBot extends StatefulWidget {
 }
 
 class _ChatBotState extends State<ChatBot> {
-  // final apiKey = dotenv.env['GEMINI_API'] ?? "";
-  final apiKey="Your api key";
+  final apiKey = dotenv.env['GEMINI_API'] ?? "";
+  // final apiKey="Your api key";
   final TextEditingController _chatController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   List<Map<String, dynamic>> _chatHistory = [];
@@ -27,9 +23,11 @@ class _ChatBotState extends State<ChatBot> {
   void initState() {
     _model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
     _chat = _model.startChat();
-    _chat.sendMessage(Content.text("This is a organ and blood blood donation application.This application includes fetches the blood and organ donors and the blood banks in the city. Guide me in case of any queries."));
+    _chat.sendMessage(Content.text(
+        "This is a organ and blood blood donation application.This application includes fetches the blood and organ donors and the blood banks in the city. Guide me in case of any queries."));
     super.initState();
   }
+
   void getAnswer() async {
     final model = GenerativeModel(
       model: 'gemini-1.5-flash',
@@ -51,8 +49,6 @@ class _ChatBotState extends State<ChatBot> {
       });
     });
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +111,7 @@ class _ChatBotState extends State<ChatBot> {
             child: Container(
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              height: 60,
+              height: 70,
               width: double.infinity,
               color: Colors.white,
               child: Row(
@@ -136,6 +132,7 @@ class _ChatBotState extends State<ChatBot> {
                             contentPadding: EdgeInsets.all(8.0),
                           ),
                           controller: _chatController,
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ),
