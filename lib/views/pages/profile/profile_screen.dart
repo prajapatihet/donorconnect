@@ -1,11 +1,13 @@
 import 'package:donorconnect/cubit/auth/auth_cubit.dart';
 import 'package:donorconnect/cubit/profile/profile_cubit.dart';
 import 'package:donorconnect/cubit/profile/profile_state.dart';
-import 'package:donorconnect/cubit/theme_toggle/value_cubit.dart';
 import 'package:donorconnect/language/helper/language_extention.dart';
 import 'package:donorconnect/views/common_widgets/toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../cubit/theme_toggle/theme_cubit.dart';
+import '../../../cubit/theme_toggle/theme_state.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String name;
@@ -175,15 +177,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 16),
                   // theme-toggle button
-                  BlocBuilder<ValueCubit, bool>(
-                    builder: (context, currentValuestate) {
-                      final switchValue = currentValuestate;
-                      // print("Current Value of switch:::$switchValue");
+                  BlocBuilder<ThemeCubit, Themestate>(
+                    builder: (context, themeState) {
+                      final isDarkMode = themeState.themeData.brightness == Brightness.dark;
                       return ThemeToggleButton(
-                        switchValue: switchValue,
+                        switchValue: isDarkMode,
                       );
                     },
                   ),
+
                   const SizedBox(height: 24),
                   // Save Button
                   ElevatedButton(

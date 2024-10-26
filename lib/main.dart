@@ -3,7 +3,7 @@ import 'package:donorconnect/cubit/auth/auth_cubit.dart';
 import 'package:donorconnect/cubit/locate_blood_banks/locate_blood_banks_cubit.dart';
 import 'package:donorconnect/cubit/profile/profile_cubit.dart';
 import 'package:donorconnect/cubit/theme_toggle/theme_cubit.dart';
-import 'package:donorconnect/cubit/theme_toggle/value_cubit.dart';
+import 'package:donorconnect/cubit/theme_toggle/theme_state.dart';
 import 'package:donorconnect/firebase_options.dart';
 import 'package:donorconnect/language/cubit/language_cubit.dart';
 import 'package:donorconnect/language/helper/language.dart';
@@ -71,13 +71,10 @@ class MyApp extends StatelessWidget {
           create: (context) => LanguageCubit()..initilize(),
         ),
         BlocProvider(
-          create: (context) => ThemeCubit(),
-        ),
-        BlocProvider(
-          create: (context) => ValueCubit(),
+          create: (context) => ThemeCubit()..setInitialTheme(),
         ),
       ],
-      child: BlocBuilder<ThemeCubit, ThemeMode>(
+      child: BlocBuilder<ThemeCubit, Themestate>(
         builder: (context, themeState) {
           return BlocBuilder<LanguageCubit, Language>(
               builder: (context, languageState) {
@@ -86,7 +83,8 @@ class MyApp extends StatelessWidget {
               supportedLocales: AppLocalizations.supportedLocales,
               locale: Locale(languageState.languageCode),
               //theme
-              themeMode: themeState,
+              // themeMode: themeState.themeData,
+              theme: themeState.themeData,
               darkTheme: ThemeData.dark(),
               debugShowCheckedModeBanner: false,
               // Main route selection
