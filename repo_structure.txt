@@ -214,7 +214,7 @@
 │   │   │   └── profile_state.dart
 │   │   └── theme_toggle/
 │   │       ├── theme_cubit.dart
-│   │       └── value_cubit.dart
+│   │       └── theme_state.dart
 │   ├── firebase_options.dart
 │   ├── l10n/
 │   │   ├── intl_en.arb
