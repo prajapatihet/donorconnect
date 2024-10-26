@@ -192,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           child: Text(
                             _text.forget_password,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color(0xff092414),
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500),
@@ -218,16 +218,17 @@ class _LoginPageState extends State<LoginPage> {
                             child: Center(
                               child: Text(
                                 _text.login,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w500),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                      
+
                       //Google Login
                       SizedBox(
                         height: screenHeight * 0.02,
@@ -249,27 +250,30 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Text(
                             _text.do_not_have_account,
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400),
+                            style: const TextStyle(
+                              color: Colors.black54,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
 
                           // SIGNUP BUTTON
                           TextButton(
                             onPressed: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const Signuppage(),
-                                  ));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Signuppage(),
+                                ),
+                              );
                             },
                             child: Text(
                               _text.signup,
-                              style: TextStyle(
-                                  color: Color(0xff092414),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500),
+                              style: const TextStyle(
+                                color: Color(0xff092414),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           )
                         ],
