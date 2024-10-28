@@ -4,6 +4,27 @@
 
 **DonorConnect**, an application designed to connect donors and organizations for life-saving contributions. This guide will help you contribute to the project.
 
+<table align="center">
+    <thead align="center">
+        <tr border: 1px;>
+            <td><b><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/tarikul-islam-anik/main/assets/images/Star.png" width="20" height="20"> Stars</b></td>
+            <td><b>🍴 Forks</b></td>
+            <td><b><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/tarikul-islam-anik/main/assets/images/Lady%20Beetle.png" width="20" height="20"> Issues</b></td>
+            <td><b><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/tarikul-islam-anik/main/assets/images/Check%20Mark%20Button.png" width="20" height="20"> Open PRs</b></td>
+            <td><b><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/tarikul-islam-anik/main/assets/images/Cross%20Mark.png" width="20" height="20"> Closed PRs</b></td>
+        </tr>
+     </thead>
+    <tbody>
+         <tr>
+            <td><img alt="Stars" src="https://img.shields.io/github/stars/prajapatihet/donorconnect?style=flat&logo=github"/></td>
+             <td><img alt="Forks" src="https://img.shields.io/github/forks/prajapatihet/donorconnect?style=flat&logo=github"/></td>
+            <td><img alt="Issues" src="https://img.shields.io/github/issues/prajapatihet/donorconnect?style=flat&logo=github"/></td>
+            <td><img alt="Open Pull Requests" src="https://img.shields.io/github/issues-pr/prajapatihet/donorconnect?style=flat&logo=github"/></td>
+           <td><img alt="Closed Pull Requests" src="https://img.shields.io/github/issues-pr-closed/prajapatihet/donorconnect?style=flat&color=critical&logo=github"/></td>
+        </tr>
+    </tbody>
+</table>
+
 ## Project Structure
 
 Check the project structure here [Project Structure](PROJECT_STRUCTURE.md)
