@@ -22,6 +22,14 @@ packages:
     description: dart
     source: sdk
     version: "0.3.2"
+  adaptive_will_pop_scope:
+    dependency: "direct main"
+    description:
+      name: adaptive_will_pop_scope
+      sha256: fbf03d8032b4a6fa0c28155a565e0c7ccde3ea2bcad8cc3069906afd1a929842
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   analyzer:
     dependency: transitive
     description:

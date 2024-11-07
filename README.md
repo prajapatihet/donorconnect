@@ -212,3 +212,42 @@ To know more [Click Here](LICENSE.md)
     </a>
 </div>
 
+<h1>Firebase Setup Guide</h1>
+    <ol>
+        <li>
+            <strong>Login to Firebase Console</strong>
+            <p>Go to the <a href="https://console.firebase.google.com/" target="_blank">Firebase Console</a> and log in with your Google account.</p>
+        </li>
+        <li>
+            <strong>Setup for Android Version</strong>
+            <p>In the Firebase Console, create a new project and follow the instructions to set up Firebase for Android.</p>
+        </li>
+        <li>
+            <strong>Download google-services.json</strong>
+            <p>Download the <code>google-services.json</code> file from the Firebase console and add it under the <code>android/app</code> folder in your Flutter project.</p>
+        </li>
+        <li>
+            <strong>Configure build.gradle</strong>
+            <p>Open the <code>android/build.gradle</code> file and add the following classpath under the <code>dependencies</code> section:</p>
+            <pre>
+classpath 'com.google.gms:google-services:4.3.15'  <!-- or the latest version -->
+            </pre>
+            <p>Then, open the <code>android/app/build.gradle</code> file and add the following line at the bottom:</p>
+            <pre>
+apply plugin: 'com.google.gms.google-services'
+            </pre>
+        </li>
+        <li>
+            <strong>Setup Firestore for Database</strong>
+            <p>In the Firebase console, go to the Firestore section and create a Firestore database for your project. Follow the on-screen instructions to choose between production or test mode.</p>
+        </li>
+        <li>
+            <strong>Setup Authentication</strong>
+            <p>In the Firebase console, go to the Authentication section and enable the following sign-in methods:</p>
+            <ul>
+                <li>Email/Password</li>
+                <li>Google</li>
+            </ul>
+            <p>Make sure to configure the necessary credentials and settings for both sign-in methods.</p>
+        </li>
+    </ol>

@@ -137,47 +137,117 @@ class _LoginPageState extends State<LoginPage> {
                       // Name
                       Column(
                         children: [
-                          Textbox(
-                            controller: emailController,
-                            obscureText: false,
-                            icons: Icons.email,
-                            name: _text.email,
-                            errormsg: _isValidate
-                                ? _text.email_field_error_text
-                                : null,
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white, // White background
+                              borderRadius:
+                                  BorderRadius.circular(10), // Rounded corners
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black
+                                      .withOpacity(0.1), // Subtle shadow effect
+                                  blurRadius: 8, // Soft shadow
+                                  offset: Offset(0, 4), // Shadow position
+                                ),
+                              ],
+                            ),
+                            child: TextField(
+                              controller: emailController,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.email,
+                                    color: Colors.green.shade900),
+                                hintText: 'Email',
+                                hintStyle:
+                                    TextStyle(color: Colors.green.shade900),
+                                errorText: _isValidate
+                                    ? _text.email_field_error_text
+                                    : null,
+                                border:
+                                    InputBorder.none, // Remove default border
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 12), // Padding inside the field
+                              ),
+                            ),
                           ),
 
                           // PASSWORD
                           SizedBox(
                             height: screenHeight * 0.02,
                           ),
-                          Textbox(
-                            controller: passwordController,
-                            obscureText: !_isPasswordVisible,
-                            icons: Icons.lock,
-                            name: _text.password,
-                            errormsg:
-                                _isValidate ? _text.password_error_text : null,
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _isPasswordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
+
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white, // White background
+                              borderRadius:
+                                  BorderRadius.circular(10), // Rounded corners
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black
+                                      .withOpacity(0.1), // Subtle shadow effect
+                                  blurRadius: 8, // Soft shadow
+                                  offset: Offset(0, 4), // Shadow position
+                                ),
+                              ],
+                            ),
+                            child: TextField(
+                              controller: passwordController,
+                              obscureText:
+                                  !_isPasswordVisible, // Password visibility control
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.lock,
+                                    color: Colors.green.shade900),
+                                hintText: 'Password',
+                                hintStyle:
+                                    TextStyle(color: Colors.green.shade900),
+                                errorText: _isValidate
+                                    ? _text.password_error_text
+                                    : null,
+                                border:
+                                    InputBorder.none, // Remove default border
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 12), // Padding inside the field
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _isPasswordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Colors.black,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _isPasswordVisible =
+                                          !_isPasswordVisible; // Toggle password visibility
+                                    });
+                                  },
+                                ),
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  _isPasswordVisible = !_isPasswordVisible;
-                                });
-                              },
                             ),
                           ),
                         ],
                       ),
 
                       // FORGOT PASSWORD BUTTON
+
+                      SizedBox(
+                        height: screenHeight * 0.01,
+                      ),
                       Padding(
-                        padding: EdgeInsets.only(left: screenWidth * 0.45),
+                        padding: EdgeInsets.only(left: screenWidth * 0.42),
                         child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(225, 200, 230,
+                                201), // Background color for the button
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(50), // Rounded corners
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 12,
+                                horizontal: 24), // Padding inside the button
+                          ),
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -193,9 +263,11 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text(
                             _text.forget_password,
                             style: const TextStyle(
-                                color: Color(0xff092414),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500),
+                              color:
+                                  Colors.black, // White text color for contrast
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       ),

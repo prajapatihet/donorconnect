@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../controllers/onboarding/onboarding_controller.dart';
 
@@ -9,18 +10,20 @@ class OnBoardingDotNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = OnBoardingController.instance;
+    // Use Get.find to access the OnBoardingController instance
+    final controller = Get.find<OnBoardingController>();
 
     return Positioned(
-      bottom: kBottomNavigationBarHeight  + 25,
+      bottom: kBottomNavigationBarHeight + 25,
       left: 154,
       child: SmoothPageIndicator(
         count: 3,
         controller: controller.pageController,
-        onDotClicked: controller.dotNavigationClick,
         effect: const ExpandingDotsEffect(
-            activeDotColor: Color.fromARGB(255, 194, 4, 4),
-            dotHeight: 6),
-      ),);
+          activeDotColor: Color.fromARGB(255, 194, 4, 4),
+          dotHeight: 6,
+        ),
+      ),
+    );
   }
-  }
+}

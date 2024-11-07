@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "445023469277",
-    "project_id": "donor-connect-project",
-    "storage_bucket": "donor-connect-project.appspot.com"
+    "project_number": "255205177926",
+    "project_id": "donorconnect-40490",
+    "storage_bucket": "donorconnect-40490.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:445023469277:android:867d6fc40fb1d859a52534",
+        "mobilesdk_app_id": "1:255205177926:android:eae013c60c9efa933c6847",
         "android_client_info": {
           "package_name": "com.example.donorconnect"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "255205177926-q7chqmo3b2sh6pmcnnfketcledt3d9jb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.donorconnect",
+            "certificate_hash": "c645004972e2e67b6e8fb81cdbff026bad48ab47"
+          }
+        },
+        {
+          "client_id": "255205177926-hd9rrs0i3ti9s2s4bchij1tk8263k8u3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDprpAsw0AkuQmFG1Iczpb9N2gghyAFmqo"
+          "current_key": "AIzaSyAaf-WvXzjym1yZ2umggxp5nuWyWM3OcJ0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "255205177926-hd9rrs0i3ti9s2s4bchij1tk8263k8u3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
