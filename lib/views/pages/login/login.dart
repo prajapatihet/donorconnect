@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                                   color: Colors.black
                                       .withOpacity(0.1), // Subtle shadow effect
                                   blurRadius: 8, // Soft shadow
-                                  offset: Offset(0, 4), // Shadow position
+                                  offset: const Offset(0, 4), // Shadow position
                                 ),
                               ],
                             ),
@@ -165,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                                     : null,
                                 border:
                                     InputBorder.none, // Remove default border
-                                contentPadding: EdgeInsets.symmetric(
+                                contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 16,
                                     vertical: 12), // Padding inside the field
                               ),
@@ -187,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                                   color: Colors.black
                                       .withOpacity(0.1), // Subtle shadow effect
                                   blurRadius: 8, // Soft shadow
-                                  offset: Offset(0, 4), // Shadow position
+                                  offset: const Offset(0, 4), // Shadow position
                                 ),
                               ],
                             ),
@@ -206,7 +206,7 @@ class _LoginPageState extends State<LoginPage> {
                                     : null,
                                 border:
                                     InputBorder.none, // Remove default border
-                                contentPadding: EdgeInsets.symmetric(
+                                contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 16,
                                     vertical: 12), // Padding inside the field
                                 suffixIcon: IconButton(
@@ -244,7 +244,7 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius:
                                   BorderRadius.circular(50), // Rounded corners
                             ),
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 12,
                                 horizontal: 24), // Padding inside the button
                           ),

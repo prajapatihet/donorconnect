@@ -37,6 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final _text = context.localizedString;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(_text.profile),
         actions: [
           IconButton(
@@ -82,7 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   TextFormField(
                     initialValue: state.medicalHistory,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(9))),
                       labelText: _text.medical_history,
                     ),
@@ -96,7 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   TextFormField(
                     initialValue: state.currentMedications,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(9))),
                       labelText: _text.current_medications,
                     ),
@@ -111,8 +112,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   TextFormField(
                     initialValue: state.allergies,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(9))),
+                      border: const OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(const Radius.circular(9))),
                       labelText: _text.allergies,
                     ),
                     onChanged: (value) =>
@@ -137,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       context.read<ProfileCubit>().updateBloodType(value ?? '');
                     },
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(9))),
                       labelText: _text.blood_type,
                     ),
@@ -179,7 +181,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // theme-toggle button
                   BlocBuilder<ThemeCubit, Themestate>(
                     builder: (context, themeState) {
-                      final isDarkMode = themeState.themeData.brightness == Brightness.dark;
+                      final isDarkMode =
+                          themeState.themeData.brightness == Brightness.dark;
                       return ThemeToggleButton(
                         switchValue: isDarkMode,
                       );

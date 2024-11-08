@@ -42,7 +42,7 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
         _isLoading = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Location permissions are denied.")),
+        const SnackBar(content: Text("Location permissions are denied.")),
       );
       return;
     }
@@ -122,22 +122,22 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
           ),
           child: Container(
             padding: const EdgeInsets.all(15.0),
-            constraints: BoxConstraints(maxHeight: 400),
+            constraints: const BoxConstraints(maxHeight: 400),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(camp['campName'] ?? 'No Name',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                SizedBox(height: 8),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20)),
+                const SizedBox(height: 8),
                 Text("Date: ${camp['date'] ?? 'Unknown'}"),
                 Text("Time: ${camp['time'] ?? 'Unknown'}"),
                 Text("Location: ${camp['location'] ?? 'Unknown'}"),
                 Text("Organizer: ${camp['organizer'] ?? 'Unknown'}"),
                 Text("Verified: ${camp['isVerified'] ?? false ? 'Yes' : 'No'}"),
                 Text("Rating: ${camp['rating'] ?? 'Not Rated'}"),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -145,14 +145,14 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
                       onPressed: () {
                         _navigateToMap(camp['latitude'], camp['longitude']);
                       },
-                      child: Text("Navigate"),
+                      child: const Text("Navigate"),
                     ),
                     ElevatedButton(
                       onPressed: () {
                         _registerForCamp(camp);
                         Navigator.of(context).pop();
                       },
-                      child: Text("Register"),
+                      child: const Text("Register"),
                     ),
                   ],
                 ),
@@ -172,7 +172,7 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
       launchUrl(googleMapsUrl);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Invalid coordinates.")),
+        const SnackBar(content: Text("Invalid coordinates.")),
       );
     }
   }
@@ -192,7 +192,8 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
 
       if (existingRegistration != null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("You are already registered for this camp.")),
+          const SnackBar(
+              content: Text("You are already registered for this camp.")),
         );
       } else {
         await registrationCollection.insert({
@@ -207,7 +208,7 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Registration successful.")),
+          const SnackBar(content: const Text("Registration successful.")),
         );
       }
 
@@ -234,10 +235,10 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Camps"),
+        title: const Text("Camps"),
         bottom: TabBar(
           controller: _tabController,
-          tabs: [
+          tabs: const [
             Tab(text: "Upcoming"),
             Tab(text: "Past"),
             Tab(text: "Registered"),
@@ -245,20 +246,20 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.calendar_month),
+            icon: const Icon(Icons.calendar_month),
             onPressed: () {
               print("hello");
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => CalendarPage()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const CalendarPage()));
             },
           ),
         ],
         automaticallyImplyLeading: false,
       ),
       body: _currentPosition == null
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : _isLoading
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : TabBarView(
                   controller: _tabController,
                   children: [
@@ -269,40 +270,40 @@ class _Camps extends State<Camps> with SingleTickerProviderStateMixin {
                 ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddCampForm,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
 
   Widget _buildCampList(List<Map<String, dynamic>> camps) {
     return ListView(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       children: camps.isEmpty
-          ? [Center(child: Text("No camps available."))]
+          ? [const Center(child: Text("No camps available."))]
           : camps.map((camp) => _buildCampCard(camp)).toList(),
     );
   }
 
   Widget _buildCampCard(Map<String, dynamic> camp) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       child: Padding(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               camp['campName'] ?? 'No Name',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text("Date: ${camp['date'] ?? 'Unknown'}"),
             Text("Time: ${camp['time'] ?? 'Unknown'}"),
             ElevatedButton(
               onPressed: () {
                 _showCampDetailsDialog(camp);
               },
-              child: Text("View Details"),
+              child: const Text("View Details"),
             ),
           ],
         ),
@@ -339,7 +340,7 @@ class _AddCampFormState extends State<AddCampForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Blood Donation Camp"),
+        title: const Text("Add Blood Donation Camp"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -349,7 +350,7 @@ class _AddCampFormState extends State<AddCampForm> {
             child: Column(
               children: [
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(9))),
                       labelText: 'Camp Name'),
@@ -363,9 +364,9 @@ class _AddCampFormState extends State<AddCampForm> {
                     _name = value!;
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(9))),
                     labelText: 'Organizer Name',
@@ -380,9 +381,9 @@ class _AddCampFormState extends State<AddCampForm> {
                     _organizer = value!;
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(9))),
                       labelText: 'Description'),
@@ -397,9 +398,9 @@ class _AddCampFormState extends State<AddCampForm> {
                     _description = value!;
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(9))),
                       labelText: 'Address'),
@@ -413,16 +414,16 @@ class _AddCampFormState extends State<AddCampForm> {
                     _address = value!;
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 // Date picker with ListTile
                 ListTile(
                   title: Text(
                     _selectedDate == null
                         ? 'Select Date'
                         : 'Date: ${DateFormat('yyyy-MM-dd').format(_selectedDate!)}',
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
-                  leading: Icon(Icons.calendar_today),
+                  leading: const Icon(Icons.calendar_today),
                   onTap: _selectDate,
                 ),
                 // Time picker with ListTile
@@ -431,16 +432,16 @@ class _AddCampFormState extends State<AddCampForm> {
                     _selectedTime == null
                         ? 'Select Time'
                         : 'Time: ${_selectedTime!.format(context)}',
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
-                  leading: Icon(Icons.access_time),
+                  leading: const Icon(Icons.access_time),
                   onTap: _selectTime,
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 if (_location.isNotEmpty) ...[
                   Text("Location: $_location"),
                 ],
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -478,7 +479,7 @@ class _AddCampFormState extends State<AddCampForm> {
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Location permission denied")),
+          const SnackBar(content: Text("Location permission denied")),
         );
         return;
       }
@@ -554,7 +555,7 @@ class _AddCampFormState extends State<AddCampForm> {
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Camp added successfully.")),
+          const SnackBar(content: Text("Camp added successfully.")),
         );
 
         await db.close();

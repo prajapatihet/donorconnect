@@ -248,7 +248,7 @@ class _SignuppageState extends State<Signuppage> {
                               color: Colors.black
                                   .withOpacity(0.1), // Subtle shadow effect
                               blurRadius: 8, // Soft shadow
-                              offset: Offset(0, 4), // Shadow position
+                              offset: const Offset(0, 4), // Shadow position
                             ),
                           ],
                         ),
@@ -265,7 +265,7 @@ class _SignuppageState extends State<Signuppage> {
                                 ? _text.email_field_error_text
                                 : null, // Error text if validation fails
                             border: InputBorder.none, // Remove default border
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16,
                                 vertical: 12), // Padding inside the field
                           ),
@@ -285,7 +285,7 @@ class _SignuppageState extends State<Signuppage> {
                               color: Colors.black
                                   .withOpacity(0.1), // Subtle shadow effect
                               blurRadius: 8, // Soft shadow
-                              offset: Offset(0, 4), // Shadow position
+                              offset: const Offset(0, 4), // Shadow position
                             ),
                           ],
                         ),
@@ -303,7 +303,7 @@ class _SignuppageState extends State<Signuppage> {
                                 ? _text.name_field_error_text
                                 : null, // Error text if validation fails
                             border: InputBorder.none, // Remove default border
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16,
                                 vertical: 12), // Padding inside the field
                           ),
@@ -323,7 +323,7 @@ class _SignuppageState extends State<Signuppage> {
                               color: Colors.black
                                   .withOpacity(0.1), // Subtle shadow effect
                               blurRadius: 8, // Soft shadow
-                              offset: Offset(0, 4), // Shadow position
+                              offset: const Offset(0, 4), // Shadow position
                             ),
                           ],
                         ),
@@ -343,7 +343,7 @@ class _SignuppageState extends State<Signuppage> {
                                 ? _text.phone_number_error_text
                                 : null, // Error text if validation fails
                             border: InputBorder.none, // Remove default border
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16,
                                 vertical: 12), // Padding inside the field
                           ),
@@ -363,7 +363,7 @@ class _SignuppageState extends State<Signuppage> {
                               color: Colors.black
                                   .withOpacity(0.1), // Subtle shadow effect
                               blurRadius: 8, // Soft shadow
-                              offset: Offset(0, 4), // Shadow position
+                              offset: const Offset(0, 4), // Shadow position
                             ),
                           ],
                         ),
@@ -382,7 +382,7 @@ class _SignuppageState extends State<Signuppage> {
                                 ? _text.password_error_text
                                 : null, // Error text if validation fails
                             border: InputBorder.none, // Remove default border
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16,
                                 vertical: 12), // Padding inside the field
                             suffixIcon: IconButton(
@@ -417,7 +417,7 @@ class _SignuppageState extends State<Signuppage> {
                               color: Colors.black
                                   .withOpacity(0.1), // Subtle shadow effect
                               blurRadius: 8, // Soft shadow
-                              offset: Offset(0, 4), // Shadow position
+                              offset: const Offset(0, 4), // Shadow position
                             ),
                           ],
                         ),
@@ -436,7 +436,7 @@ class _SignuppageState extends State<Signuppage> {
                                 ? _text.password_dont_match
                                 : null, // Error text if validation fails
                             border: InputBorder.none, // Remove default border
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16,
                                 vertical: 12), // Padding inside the field
                             suffixIcon: IconButton(
