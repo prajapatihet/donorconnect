@@ -31,7 +31,7 @@ class _SignuppageState extends State<Signuppage> {
   bool _isConfirmPasswordValid = false;
 
   //variable to control password visibility
-  bool _isPasswordVisible =false;
+  bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
 
   bool isValidEmail(String email) {
@@ -94,7 +94,8 @@ class _SignuppageState extends State<Signuppage> {
                 title: Center(
                     child: Text(
                   context.localizedString.password_dont_match,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w500),
                 )),
               );
             });
@@ -237,79 +238,223 @@ class _SignuppageState extends State<Signuppage> {
                       SizedBox(height: screenHeight * 0.02),
 
                       // EMAIL TEXTBOX
-                      Textbox(
-                        controller: emailController,
-                        obscureText: false,
-                        icons: Icons.mail,
-                        name: _text.email,
-                        errormsg:
-                            _isEmailValid ? _text.email_field_error_text : null,
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white, // White background
+                          borderRadius:
+                              BorderRadius.circular(10), // Rounded corners
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black
+                                  .withOpacity(0.1), // Subtle shadow effect
+                              blurRadius: 8, // Soft shadow
+                              offset: Offset(0, 4), // Shadow position
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          controller: emailController,
+                          obscureText: false, // Email is not obscured
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.mail,
+                                color: Colors.green.shade900), // Mail icon
+                            hintText: 'Email', // Placeholder text
+                            hintStyle: TextStyle(
+                                color: Colors.green.shade900), // Hint style
+                            errorText: _isEmailValid
+                                ? _text.email_field_error_text
+                                : null, // Error text if validation fails
+                            border: InputBorder.none, // Remove default border
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12), // Padding inside the field
+                          ),
+                        ),
                       ),
+
                       SizedBox(height: screenHeight * 0.02),
 
                       // FULL NAME TEXTBOX
-                      Textbox(
-                        controller: nameController,
-                        obscureText: false,
-                        icons: Icons.person,
-                        name: _text.full_name,
-                        errormsg:
-                            _isNameValid ? _text.name_field_error_text : null,
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white, // White background
+                          borderRadius:
+                              BorderRadius.circular(10), // Rounded corners
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black
+                                  .withOpacity(0.1), // Subtle shadow effect
+                              blurRadius: 8, // Soft shadow
+                              offset: Offset(0, 4), // Shadow position
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          controller: nameController,
+                          obscureText: false, // Name is not obscured
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.person,
+                                color: Colors.green.shade900), // Person icon
+                            hintText: _text
+                                .full_name, // Placeholder text for full name
+                            hintStyle: TextStyle(
+                                color: Colors.green.shade900), // Hint style
+                            errorText: _isNameValid
+                                ? _text.name_field_error_text
+                                : null, // Error text if validation fails
+                            border: InputBorder.none, // Remove default border
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12), // Padding inside the field
+                          ),
+                        ),
                       ),
+
                       SizedBox(height: screenHeight * 0.02),
 
                       // PHONE NUMBER TEXTBOX
-                      Textbox(
-                        controller: numberController,
-                        obscureText: false,
-                        icons: Icons.call,
-                        name: _text.phone_number,
-                        errormsg: _isPhoneValid
-                            ? _text.phone_number_error_text
-                            : null,
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white, // White background
+                          borderRadius:
+                              BorderRadius.circular(10), // Rounded corners
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black
+                                  .withOpacity(0.1), // Subtle shadow effect
+                              blurRadius: 8, // Soft shadow
+                              offset: Offset(0, 4), // Shadow position
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          controller: numberController,
+                          obscureText: false, // Phone number is not obscured
+                          keyboardType: TextInputType
+                              .phone, // Keyboard type for phone numbers
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.call,
+                                color: Colors.green.shade900), // Call icon
+                            hintText: _text
+                                .phone_number, // Placeholder text for phone number
+                            hintStyle: TextStyle(
+                                color: Colors.green.shade900), // Hint style
+                            errorText: _isPhoneValid
+                                ? _text.phone_number_error_text
+                                : null, // Error text if validation fails
+                            border: InputBorder.none, // Remove default border
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12), // Padding inside the field
+                          ),
+                        ),
                       ),
+
                       SizedBox(height: screenHeight * 0.02),
 
                       // PASSWORD TEXTBOX
-                      Textbox(
-                        controller: passwordController,
-                        obscureText: ! _isPasswordVisible,
-                        icons: Icons.lock,
-                        name: _text.create_password,
-                        errormsg:
-                            _isPasswordValid ? _text.password_error_text : null,
-                         suffixIcon: IconButton(
-                          icon: Icon(
-                            _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _isPasswordVisible = !_isPasswordVisible;
-                            });
-                          },
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white, // White background
+                          borderRadius:
+                              BorderRadius.circular(10), // Rounded corners
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black
+                                  .withOpacity(0.1), // Subtle shadow effect
+                              blurRadius: 8, // Soft shadow
+                              offset: Offset(0, 4), // Shadow position
+                            ),
+                          ],
                         ),
-                        
+                        child: TextField(
+                          controller: passwordController,
+                          obscureText:
+                              !_isPasswordVisible, // Toggles password visibility
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.lock,
+                                color: Colors.green.shade900), // Lock icon
+                            hintText: _text
+                                .create_password, // Placeholder text for password
+                            hintStyle: TextStyle(
+                                color: Colors.green.shade900), // Hint style
+                            errorText: _isPasswordValid
+                                ? _text.password_error_text
+                                : null, // Error text if validation fails
+                            border: InputBorder.none, // Remove default border
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12), // Padding inside the field
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _isPasswordVisible
+                                    ? Icons.visibility
+                                    : Icons
+                                        .visibility_off, // Visibility toggle icon
+                                color: Colors.green.shade900,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _isPasswordVisible =
+                                      !_isPasswordVisible; // Toggle visibility
+                                });
+                              },
+                            ),
+                          ),
+                        ),
                       ),
+
                       SizedBox(height: screenHeight * 0.02),
 
                       // CONFIRM PASSWORD
-                      Textbox(
-                        controller: confirmPasswordController,
-                        obscureText: ! _isConfirmPasswordVisible,
-                        icons: Icons.lock,
-                        name: _text.confirm_password,
-                        errormsg: _isConfirmPasswordValid
-                            ? _text.password_dont_match
-                            : null,
-                         suffixIcon: IconButton(
-                          icon: Icon(
-                            _isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white, // White background
+                          borderRadius:
+                              BorderRadius.circular(10), // Rounded corners
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black
+                                  .withOpacity(0.1), // Subtle shadow effect
+                              blurRadius: 8, // Soft shadow
+                              offset: Offset(0, 4), // Shadow position
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          controller: confirmPasswordController,
+                          obscureText:
+                              !_isConfirmPasswordVisible, // Toggles confirm password visibility
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.lock,
+                                color: Colors.green.shade900), // Lock icon
+                            hintText: _text
+                                .confirm_password, // Placeholder text for confirm password
+                            hintStyle: TextStyle(
+                                color: Colors.green.shade900), // Hint style
+                            errorText: _isConfirmPasswordValid
+                                ? _text.password_dont_match
+                                : null, // Error text if validation fails
+                            border: InputBorder.none, // Remove default border
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12), // Padding inside the field
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _isConfirmPasswordVisible
+                                    ? Icons.visibility
+                                    : Icons
+                                        .visibility_off, // Visibility toggle icon
+                                color: Colors.green.shade900,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _isConfirmPasswordVisible =
+                                      !_isConfirmPasswordVisible; // Toggle visibility
+                                });
+                              },
+                            ),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
-                            });
-                          },
                         ),
                       ),
 

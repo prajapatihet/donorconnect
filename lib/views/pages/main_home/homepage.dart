@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import '../profile/profile_screen.dart';
 import 'home_pages/home_screen.dart';
 import 'package:donorconnect/language/helper/language_extention.dart';
+import 'package:adaptive_will_pop_scope/adaptive_will_pop_scope.dart'; // Import the adaptive will pop scope
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   final token;
@@ -18,27 +21,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // @override
-  // void dispose() {
-  //   Get.delete<NavigationController>();
-  //   super.dispose();
-  // }
-  // late ScrollController controller;
-  //
-  /// variables
   int _currentIndex = 0;
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   controller = ScrollController();
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   controller.dispose;
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -54,56 +37,75 @@ class _HomePageState extends State<HomePage> {
       ),
     ];
 
-    return Scaffold(
-      bottomNavigationBar: CustomNavigationBar(
-        scaleFactor: 0.2,
-        strokeColor: Colors.blueGrey,
-        iconSize: 24,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        selectedColor: Colors.blue,
-        unSelectedColor: Colors.blue.withOpacity(0.4),
-        isFloating: false,
-        currentIndex: _currentIndex,
-        scaleCurve: Curves.bounceOut,
-        bubbleCurve: Curves.easeInOut,
-        onTap: (int newIndex) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return AdaptiveWillPopScope(
+      onWillPop: () async {
+        if (_currentIndex == 0) {
+          // If we are on the HomeScreen, show the exit confirmation dialog
+          bool exitApp = await _showExitConfirmationDialog(context) ?? false;
+          return exitApp; // Return true to exit the app, false to do nothing
+        } else {
+          // If we are not on the HomeScreen, navigate to HomeScreen
           setState(() {
-            _currentIndex = newIndex;
-            pageController.animateToPage(newIndex,
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.fastOutSlowIn);
+            _currentIndex = 0; // Navigate to the HomeScreen
           });
-        },
-        items: [
-          CustomNavigationBarItem(
-            icon: const Icon(Icons.home),
-            title: Text(
-              _text.home,
-              style: const TextStyle(fontSize: 12),
+          pageController.jumpToPage(0); // Jump to HomeScreen
+          return false; // Don't pop the page
+        }
+      },
+      swipeWidth: screenWidth,
+      swipeThreshold: screenWidth / 2,
+      child: Scaffold(
+        bottomNavigationBar: CustomNavigationBar(
+          scaleFactor: 0.2,
+          strokeColor: Colors.blueGrey,
+          iconSize: 24,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          selectedColor: Colors.blue,
+          unSelectedColor: Colors.blue.withOpacity(0.4),
+          isFloating: false,
+          currentIndex: _currentIndex,
+          scaleCurve: Curves.bounceOut,
+          bubbleCurve: Curves.easeInOut,
+          onTap: (int newIndex) {
+            setState(() {
+              _currentIndex = newIndex;
+              pageController.animateToPage(newIndex,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.fastOutSlowIn);
+            });
+          },
+          items: [
+            CustomNavigationBarItem(
+              icon: const Icon(Icons.home),
+              title: Text(
+                _text.home,
+                style: const TextStyle(fontSize: 12),
+              ),
             ),
-          ),
-          CustomNavigationBarItem(
-              icon: const Icon(Icons.search),
-              title: Text(
-                _text.search,
-                style: const TextStyle(fontSize: 12),
-              )),
-          CustomNavigationBarItem(
-              icon: const Icon(Icons.event),
-              title: Text(
-                _text.camps,
-                style: const TextStyle(fontSize: 12),
-              )),
-          CustomNavigationBarItem(
-              icon: const Icon(Icons.person),
-              title: Text(
-                _text.profile,
-                style: const TextStyle(fontSize: 12),
-              )),
-        ],
-      ),
-      body: PageView.builder(
+            CustomNavigationBarItem(
+                icon: const Icon(Icons.search),
+                title: Text(
+                  _text.search,
+                  style: const TextStyle(fontSize: 12),
+                )),
+            CustomNavigationBarItem(
+                icon: const Icon(Icons.event),
+                title: Text(
+                  _text.camps,
+                  style: const TextStyle(fontSize: 12),
+                )),
+            CustomNavigationBarItem(
+                icon: const Icon(Icons.person),
+                title: Text(
+                  _text.profile,
+                  style: const TextStyle(fontSize: 12),
+                )),
+          ],
+        ),
+        body: PageView.builder(
           controller: pageController,
           onPageChanged: (int newIndex) {
             setState(() {
@@ -113,7 +115,34 @@ class _HomePageState extends State<HomePage> {
           itemCount: 4,
           itemBuilder: (BuildContext context, int index) {
             return pages[index];
-          }),
+          },
+        ),
+      ),
     );
   }
+
+  Future<bool?> _showExitConfirmationDialog(BuildContext context) =>
+      showCupertinoModalPopup<bool>(
+        context: context,
+        builder: (_) => CupertinoAlertDialog(
+          title: const Text('Are you sure'),
+          content: const Text('Do you really want to exit the app?'),
+          actions: <CupertinoDialogAction>[
+            CupertinoDialogAction(
+              isDefaultAction: true,
+              onPressed: () => Navigator.pop(context, false), // Don't exit
+              child: const Text('No'),
+            ),
+            CupertinoDialogAction(
+              isDestructiveAction: true,
+              onPressed: () {
+                Navigator.pop(context, true); // Exit the app
+                // Ensure the app closes after exit confirmation
+                SystemNavigator.pop();
+              },
+              child: const Text('Yes'),
+            ),
+          ],
+        ),
+      );
 }

@@ -1,55 +1,52 @@
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:donorconnect/views/pages/login/login.dart'; // Import LoginPage
 import 'package:get_storage/get_storage.dart';
-
-import '../../pages/login/login.dart';
-
+import 'package:flutter/foundation.dart';
 
 class OnBoardingController extends GetxController {
-  static OnBoardingController get instance => Get.find();
+  // Page controller for the PageView
+  var pageController = PageController();
 
-  /// Variable
-  final pageController = PageController();
-  // final currentPageIndex = 0.obs; alternate method below
+  // Observable to track the current page index
   Rx<int> currentPageIndex = 0.obs;
-/// Update Current Index when page Scroll
- void updatePageIndicator(index) => currentPageIndex.value = index;
 
-/// Jump to the specific dot selected page.
-void dotNavigationClick(index) {
-  currentPageIndex.value = index;
-  pageController.jumpTo(index);
-}
-
-/// Update Current Index & jump to next page
-void nextPage() {
-  if(currentPageIndex.value == 2){
-    final storage = GetStorage();
-
-    if(kDebugMode){
-      print('===================== GET STORAGE ==============');
-      print(storage.read('IsFirstTime'));
-    }
-
-    storage.write('IsFirstTime', false);
-
-    if(kDebugMode){
-      print('===================== GET STORAGE ==============');
-      print(storage.read('IsFirstTime'));
-    }
-
-    Get.offAll(const LoginPage());
-  } else{
-    int page = currentPageIndex.value + 1;
-    pageController.jumpToPage(page);
+  // Update the page indicator when the page changes
+  void updatePageIndicator(int index) {
+    currentPageIndex.value = index;
   }
-}
 
-/// Update current index & jump to the last Page
-void skipPage() {
-  currentPageIndex.value = 2;
-  pageController.jumpTo(2);
-}
+  // Method to navigate to a specific page based on dot navigation
+  void dotNavigationClick(int index) {
+    currentPageIndex.value = index;
+    pageController.jumpToPage(index);
+  }
+
+  // Method to navigate to the next page or to the login page if it's the last page
+  void nextPage() {
+    if (currentPageIndex.value == 2) {
+      final storage = GetStorage();
+
+      // Update the storage to indicate the user has completed onboarding
+      storage.write('IsFirstTime', false);
+
+      // Navigate to the LoginPage
+      Get.offAll(const LoginPage());
+    } else {
+      // Move to the next page
+      int nextPage = currentPageIndex.value + 1;
+      pageController.jumpToPage(nextPage);
+    }
+  }
+
+  // Skip the onboarding process and jump to the last page (LoginPage)
+  void skipPage() {
+    currentPageIndex.value = 2;
+    pageController.jumpToPage(2);
+  }
+
+  // Method to go to the login page directly
+  void goToLoginPage() {
+    Get.to(() => const LoginPage()); // Navigate to LoginPage
+  }
 }

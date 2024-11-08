@@ -61,6 +61,8 @@ dependencies:
   google_generative_ai: ^0.4.6
   flutter_dotenv: ^5.2.1
 
+  adaptive_will_pop_scope: ^1.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
