@@ -7,6 +7,7 @@
 ├── LICENSE.md
 ├── PROJECT_STRUCTURE.md
 ├── README.md
+├── Security.md
 ├── analysis_options.yaml
 ├── android/
 │   ├── app/
